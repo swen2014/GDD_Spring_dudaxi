@@ -162,6 +162,13 @@
 			<key>tabletScale</key>
 			<integer>1</integer>
 		</dict>
+		<key>sprite</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+			<key>isSmartSpriteSheet</key>
+			<true/>
+		</dict>
 	</dict>
 	<key>versionStr</key>
 	<string>revision : 71571752ab
