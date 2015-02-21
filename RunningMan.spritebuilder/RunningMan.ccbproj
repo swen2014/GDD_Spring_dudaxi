@@ -166,8 +166,6 @@
 		<dict>
 			<key>isDirty</key>
 			<true/>
-			<key>isSmartSpriteSheet</key>
-			<true/>
 		</dict>
 	</dict>
 	<key>versionStr</key>
