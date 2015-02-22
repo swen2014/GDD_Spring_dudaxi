@@ -57,7 +57,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>MainScene/walk right-1.png</string>
+								<string>MainScene/walk left-1.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -75,7 +75,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>MainScene/walk right-2.png</string>
+								<string>MainScene/walk left-2.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -93,7 +93,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>MainScene/walk right-3.png</string>
+								<string>MainScene/walk left-3.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -111,7 +111,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>MainScene/walk right-4.png</string>
+								<string>MainScene/walk left-4.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -186,7 +186,7 @@
 			<dict>
 				<key>baseValue</key>
 				<array>
-					<string>MainScene/walk right-1.png</string>
+					<string>MainScene/walk left-1.png</string>
 					<string>Use regular file</string>
 				</array>
 				<key>name</key>
@@ -196,7 +196,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>MainScene/walk right-1.png</string>
+					<string>MainScene/walk left-1.png</string>
 				</array>
 			</dict>
 			<dict>
@@ -232,8 +232,6 @@
 				<array/>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
@@ -289,7 +287,7 @@
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.0</real>
+			<real>0.13333334028720856</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
