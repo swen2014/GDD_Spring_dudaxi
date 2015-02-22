@@ -57,7 +57,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>MainScene/walk right-1.png</string>
+								<string>MainScene/man1.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -75,7 +75,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>MainScene/walk right-2.png</string>
+								<string>MainScene/man2.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -93,25 +93,7 @@
 							<integer>7</integer>
 							<key>value</key>
 							<array>
-								<string>MainScene/walk right-3.png</string>
-								<string>Use regular file</string>
-							</array>
-						</dict>
-						<dict>
-							<key>easing</key>
-							<dict>
-								<key>type</key>
-								<integer>0</integer>
-							</dict>
-							<key>name</key>
-							<string>spriteFrame</string>
-							<key>time</key>
-							<real>0.10000000149011612</real>
-							<key>type</key>
-							<integer>7</integer>
-							<key>value</key>
-							<array>
-								<string>MainScene/walk right-4.png</string>
+								<string>MainScene/man3.png</string>
 								<string>Use regular file</string>
 							</array>
 						</dict>
@@ -128,7 +110,7 @@
 		<key>children</key>
 		<array/>
 		<key>customClass</key>
-		<string>Robot</string>
+		<string>Man</string>
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
@@ -142,7 +124,7 @@
 			<key>allowsRotation</key>
 			<true/>
 			<key>bodyShape</key>
-			<integer>1</integer>
+			<integer>0</integer>
 			<key>collisionCategories</key>
 			<array/>
 			<key>collisionMask</key>
@@ -150,7 +132,7 @@
 			<key>collisionType</key>
 			<string></string>
 			<key>cornerRadius</key>
-			<real>24</real>
+			<real>0.0</real>
 			<key>density</key>
 			<real>1</real>
 			<key>dynamic</key>
@@ -162,12 +144,43 @@
 			<key>points</key>
 			<array>
 				<array>
-					<real>24</real>
-					<real>24</real>
+					<real>0.0</real>
+					<real>0.0</real>
+				</array>
+				<array>
+					<real>0.0</real>
+					<real>32</real>
+				</array>
+				<array>
+					<real>28</real>
+					<real>32</real>
+				</array>
+				<array>
+					<real>28</real>
+					<real>0.0</real>
 				</array>
 			</array>
 			<key>polygons</key>
-			<array/>
+			<array>
+				<array>
+					<array>
+						<real>28</real>
+						<real>0.0</real>
+					</array>
+					<array>
+						<real>28</real>
+						<real>32</real>
+					</array>
+					<array>
+						<real>0.0</real>
+						<real>32</real>
+					</array>
+					<array>
+						<real>0.0</real>
+						<real>0.0</real>
+					</array>
+				</array>
+			</array>
 		</dict>
 		<key>properties</key>
 		<array>
@@ -220,7 +233,7 @@
 			<dict>
 				<key>baseValue</key>
 				<array>
-					<string>MainScene/walk right-1.png</string>
+					<string>MainScene/man1.png</string>
 					<string>Use regular file</string>
 				</array>
 				<key>name</key>
@@ -230,7 +243,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>MainScene/walk right-1.png</string>
+					<string>MainScene/man1.png</string>
 				</array>
 			</dict>
 			<dict>
@@ -267,8 +280,6 @@
 			</dict>
 		</array>
 		<key>selected</key>
-		<true/>
-		<key>seqExpanded</key>
 		<true/>
 	</dict>
 	<key>notes</key>
@@ -319,17 +330,17 @@
 			<key>chainedSequenceId</key>
 			<integer>0</integer>
 			<key>length</key>
-			<real>0.13333334028720856</real>
+			<real>0.10000000149011612</real>
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.0</real>
+			<real>0.10000000149011612</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
-			<real>128</real>
+			<real>390.86236572265625</real>
 			<key>sequenceId</key>
 			<integer>0</integer>
 			<key>soundChannel</key>
