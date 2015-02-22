@@ -67,6 +67,8 @@
 		927F61BA196C771E000F43EF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B737896D180762440076A88C /* Default.png */; };
 		927F61BB196C771E000F43EF /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B014A35C1A9936D30064447B /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = B014A35B1A9936D30064447B /* Level.m */; };
+		B0849F481A9A853400BAE66F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F471A9A853400BAE66F /* AppDelegate.m */; };
+		B0849F4C1A9A85E000BAE66F /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F4B1A9A85E000BAE66F /* Gameplay.m */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
 		B71F5913188484E7003F4D28 /* iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5909188484E7003F4D28 /* iPad.png */; };
@@ -197,6 +199,10 @@
 		927F61BF196C771E000F43EF /* RunningMan Android.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RunningMan Android.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B014A35A1A9936D30064447B /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Level.h; path = Source/Level.h; sourceTree = "<group>"; };
 		B014A35B1A9936D30064447B /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Level.m; path = Source/Level.m; sourceTree = "<group>"; };
+		B0849F461A9A853400BAE66F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Source/AppDelegate.h; sourceTree = "<group>"; };
+		B0849F471A9A853400BAE66F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Source/AppDelegate.m; sourceTree = "<group>"; };
+		B0849F4A1A9A85E000BAE66F /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gameplay.h; path = Source/Gameplay.h; sourceTree = "<group>"; };
+		B0849F4B1A9A85E000BAE66F /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
 		B71F5909188484E7003F4D28 /* iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPad.png; path = Icons/iPad.png; sourceTree = "<group>"; };
@@ -460,7 +466,10 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				7A40362019DDEF0D007B6E8F /* Platforms */,
+				B0849F461A9A853400BAE66F /* AppDelegate.h */,
+				B0849F471A9A853400BAE66F /* AppDelegate.m */,
+				B0849F4A1A9A85E000BAE66F /* Gameplay.h */,
+				B0849F4B1A9A85E000BAE66F /* Gameplay.m */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B014A35A1A9936D30064447B /* Level.h */,
 				B014A35B1A9936D30064447B /* Level.m */,
@@ -494,6 +503,7 @@
 		B77F1B2517B978D7009739AE = {
 			isa = PBXGroup;
 			children = (
+				7A40362019DDEF0D007B6E8F /* Platforms */,
 				B737893C1807616C0076A88C /* Source */,
 				B77F1B4617B978D7009739AE /* Resources */,
 				9222E2B918734FF800A246C7 /* libs */,
@@ -870,6 +880,8 @@
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				B014A35C1A9936D30064447B /* Level.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
+				B0849F481A9A853400BAE66F /* AppDelegate.m in Sources */,
+				B0849F4C1A9A85E000BAE66F /* Gameplay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
