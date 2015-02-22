@@ -163,17 +163,7 @@
 			<integer>1</integer>
 		</dict>
 		<key>sprite</key>
-		<dict>
-			<key>isDirty</key>
-			<true/>
-		</dict>
-		<key>sprite/set_tappy-plane</key>
-		<dict>
-			<key>isDirty</key>
-			<true/>
-			<key>isSmartSpriteSheet</key>
-			<true/>
-		</dict>
+		<dict/>
 	</dict>
 	<key>versionStr</key>
 	<string>revision : 71571752ab
