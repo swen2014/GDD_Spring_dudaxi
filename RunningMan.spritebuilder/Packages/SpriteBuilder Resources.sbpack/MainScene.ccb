@@ -155,8 +155,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -862,11 +860,11 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>400.00006103515625</real>
-							<real>59.000015258789062</real>
-							<integer>0</integer>
-							<integer>0</integer>
-							<integer>0</integer>
+							<real>0.20000000298023224</real>
+							<real>0.20999999344348907</real>
+							<integer>3</integer>
+							<integer>2</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -891,6 +889,8 @@
 						<string>Man.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
