@@ -68,6 +68,9 @@
 		927F61BB196C771E000F43EF /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B0849F611A9AA2C500BAE66F /* Robot.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F601A9AA2C500BAE66F /* Robot.m */; };
 		B0849F651A9AA31400BAE66F /* Man.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F641A9AA31400BAE66F /* Man.m */; };
+		B0849F6E1A9AB11100BAE66F /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F6D1A9AB11100BAE66F /* Gameplay.m */; };
+		B0849F711A9AB2AA00BAE66F /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F701A9AB2AA00BAE66F /* Level.m */; };
+		B0849F741A9AB91600BAE66F /* Actionfollow.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F731A9AB91600BAE66F /* Actionfollow.m */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
 		B71F5913188484E7003F4D28 /* iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5909188484E7003F4D28 /* iPad.png */; };
@@ -200,6 +203,12 @@
 		B0849F601A9AA2C500BAE66F /* Robot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Robot.m; path = Source/Robot.m; sourceTree = "<group>"; };
 		B0849F631A9AA31400BAE66F /* Man.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Man.h; path = Source/Man.h; sourceTree = "<group>"; };
 		B0849F641A9AA31400BAE66F /* Man.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Man.m; path = Source/Man.m; sourceTree = "<group>"; };
+		B0849F6C1A9AB11100BAE66F /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gameplay.h; path = Source/Gameplay.h; sourceTree = "<group>"; };
+		B0849F6D1A9AB11100BAE66F /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
+		B0849F6F1A9AB2AA00BAE66F /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Level.h; path = Source/Level.h; sourceTree = "<group>"; };
+		B0849F701A9AB2AA00BAE66F /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Level.m; path = Source/Level.m; sourceTree = "<group>"; };
+		B0849F721A9AB91600BAE66F /* Actionfollow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Actionfollow.h; path = Source/Actionfollow.h; sourceTree = "<group>"; };
+		B0849F731A9AB91600BAE66F /* Actionfollow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Actionfollow.m; path = Source/Actionfollow.m; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
 		B71F5909188484E7003F4D28 /* iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPad.png; path = Icons/iPad.png; sourceTree = "<group>"; };
@@ -468,6 +477,12 @@
 				B0849F5F1A9AA2C500BAE66F /* Robot.h */,
 				B0849F601A9AA2C500BAE66F /* Robot.m */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
+				B0849F6C1A9AB11100BAE66F /* Gameplay.h */,
+				B0849F721A9AB91600BAE66F /* Actionfollow.h */,
+				B0849F731A9AB91600BAE66F /* Actionfollow.m */,
+				B0849F6D1A9AB11100BAE66F /* Gameplay.m */,
+				B0849F6F1A9AB2AA00BAE66F /* Level.h */,
+				B0849F701A9AB2AA00BAE66F /* Level.m */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
 				D352B48019EC608A00829775 /* MetalShaders */,
@@ -873,9 +888,12 @@
 			files = (
 				B0849F611A9AA2C500BAE66F /* Robot.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				B0849F741A9AB91600BAE66F /* Actionfollow.m in Sources */,
 				B0849F651A9AA31400BAE66F /* Man.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
+				B0849F711A9AB2AA00BAE66F /* Level.m in Sources */,
+				B0849F6E1A9AB11100BAE66F /* Gameplay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,14 +10,14 @@
 
 @implementation Robot
 
-- (id)init {
-    self = [super init];
-    
-    if (self) {
-        CCLOG(@"Robot created");
-    }
-    
-    return self;
-}
+//- (id)init {
+//    self = [super init];
+//    
+//    if (self) {
+//        CCLOG(@"Robot created");
+//    }
+//    
+//    return self;
+//}
 
 @end
