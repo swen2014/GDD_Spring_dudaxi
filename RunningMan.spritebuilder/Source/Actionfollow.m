@@ -7,8 +7,7 @@
 //
 
 #import "Actionfollow.h"
-
-@implementation Actionfollow (CurrentOffset)
+@implementation CCActionFollow(CurrentOffset)
 
 - (CGPoint)currentOffset {
     if(_boundarySet)

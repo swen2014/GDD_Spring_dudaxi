@@ -8,7 +8,7 @@
 
 #import "CCAction.h"
 
-@interface Actionfollow (CurrentOffset)
+@interface CCActionFollow (CurrentOffset)
 
 - (CGPoint)currentOffset;
 @end
