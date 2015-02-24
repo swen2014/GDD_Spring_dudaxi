@@ -36,6 +36,8 @@ static NSString * const kFirstLevel = @"LevelFinal";
     [_levelNode addChild:_loadedLevel];
     
     levelSpeed = _loadedLevel.levelSpeed;
+    
+//    _physicsNode.debugDraw=true;
 }
 
 - (void)onEnter {
