@@ -14,6 +14,9 @@
 
 static NSString *selectedLevel = @"LevelFinal";
 static int levelSpeed = 10;
+static NSString * const kFirstLevel = @"LevelFinal";
+//static NSString *selectedLevel = @"Level1";
+//static int levelSpeed = 0;
 
 
 @implementation Gameplay {
@@ -54,9 +57,9 @@ static int levelSpeed = 10;
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     [_robot.physicsBody.chipmunkObjects[0] eachArbiter:^(cpArbiter *arbiter) {
         if (!_jumped) {
-            [_robot.physicsBody applyImpulse:ccp(0, 1000)];
+            [_robot.physicsBody applyImpulse:ccp(0, 2500)];
             _jumped = TRUE;
-            [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.3f];
+            [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.1f];
         }
     }];
 }

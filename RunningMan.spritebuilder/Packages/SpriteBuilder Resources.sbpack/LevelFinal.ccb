@@ -5987,7 +5987,7 @@
 				<key>memberVarAssignmentName</key>
 				<string>_robot</string>
 				<key>memberVarAssignmentType</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>properties</key>
 				<array>
 					<dict>
@@ -6051,6 +6051,16 @@
 				<integer>0</integer>
 				<key>value</key>
 				<string>40</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>nextLevelName</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>3</integer>
+				<key>value</key>
+				<string>Level</string>
 			</dict>
 		</array>
 		<key>displayName</key>

@@ -47,7 +47,7 @@
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
-				<string>Level</string>
+				<string></string>
 				<key>customProperties</key>
 				<array>
 					<dict>
@@ -62,7 +62,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>nextLevel</string>
+						<string>nextLevelname</string>
 						<key>optimized</key>
 						<false/>
 						<key>type</key>
@@ -206,12 +206,33 @@
 						<real>0.33000001311302185</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string></string>
+		<string>Level</string>
+		<key>customProperties</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>levelSpeed</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>0</integer>
+				<key>value</key>
+				<string>20</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>nextLevelName</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>0</integer>
+				<key>value</key>
+				<string>0</string>
+			</dict>
+		</array>
 		<key>displayName</key>
 		<string>CCNode</string>
 		<key>memberVarAssignmentName</key>
@@ -280,6 +301,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
