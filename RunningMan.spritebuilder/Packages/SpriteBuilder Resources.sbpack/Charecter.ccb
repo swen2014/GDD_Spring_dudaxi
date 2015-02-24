@@ -60,17 +60,17 @@
 			<key>collisionMask</key>
 			<array/>
 			<key>collisionType</key>
-			<string></string>
+			<string>robot</string>
 			<key>cornerRadius</key>
 			<real>24</real>
 			<key>density</key>
-			<real>10</real>
+			<real>2</real>
 			<key>dynamic</key>
 			<true/>
 			<key>elasticity</key>
 			<real>0.30000001192092896</real>
 			<key>friction</key>
-			<real>0.30000001192092896</real>
+			<real>0.10000000149011612</real>
 			<key>points</key>
 			<array>
 				<array>

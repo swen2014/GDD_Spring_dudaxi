@@ -13,7 +13,7 @@
 #define CP_ALLOW_PRIVATE_ACCESS 1
 
 static NSString *selectedLevel = @"LevelFinal";
-static int levelSpeed = 10;
+static int levelSpeed = 100;
 static NSString * const kFirstLevel = @"LevelFinal";
 //static NSString *selectedLevel = @"Level1";
 //static int levelSpeed = 0;
@@ -57,7 +57,7 @@ static NSString * const kFirstLevel = @"LevelFinal";
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     [_robot.physicsBody.chipmunkObjects[0] eachArbiter:^(cpArbiter *arbiter) {
         if (!_jumped) {
-            [_robot.physicsBody applyImpulse:ccp(0, 2500)];
+            [_robot.physicsBody applyImpulse:ccp(0, 500)];
             _jumped = TRUE;
             [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.1f];
         }
@@ -73,6 +73,27 @@ static NSString * const kFirstLevel = @"LevelFinal";
 - (void)fixedUpdate:(CCTime)delta
 {
     _robot.physicsBody.velocity = ccp(40.f, _robot.physicsBody.velocity.y);
+}
+
+#pragma mark - Collision Handling
+//- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair hero:(CCNode *)hero flag:(CCNode *)flag {
+//    self.paused = YES;
+//    
+//    WinPopup *popup = (WinPopup *)[CCBReader load:@"WinPopup" owner:self];
+//    popup.positionType = CCPositionTypeNormalized;
+//    popup.position = ccp(0.5, 0.5);
+//    [self addChild:popup];
+//    
+//    return YES;
+//}
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robot:(CCNode *)robot poo:(CCNode *)poo {
+    [poo removeFromParent];
+//    _score++;
+//    _scoreLabel.string = [NSString stringWithFormat:@"%d", _score];
+//    
+    [self gameOver];
+    return NO;
 }
 
 #pragma mark - Update
