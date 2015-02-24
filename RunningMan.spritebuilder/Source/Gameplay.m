@@ -10,7 +10,7 @@
 #import "Level.h"
 #import "Actionfollow.h"
 #import "CCPhysics+ObjectiveChipmunk.h"
-#define CP_ALLOW_PRIVATE_ACCESS 1
+//#define CP_ALLOW_PRIVATE_ACCESS 1
 
 static NSString *selectedLevel = @"LevelFinal";
 static int levelSpeed = 100;
@@ -59,7 +59,7 @@ static NSString * const kFirstLevel = @"LevelFinal";
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     [_robot.physicsBody.chipmunkObjects[0] eachArbiter:^(cpArbiter *arbiter) {
         if (!_jumped) {
-            [_robot.physicsBody applyImpulse:ccp(0, 500)];
+            [_robot.physicsBody applyImpulse:ccp(10, 500)];
             _jumped = TRUE;
             [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.1f];
         }
