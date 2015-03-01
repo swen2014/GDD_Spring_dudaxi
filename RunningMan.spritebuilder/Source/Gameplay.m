@@ -37,7 +37,7 @@ static NSString * const kFirstLevel = @"LevelFinal";
     
     levelSpeed = _loadedLevel.levelSpeed;
     
-//    _physicsNode.debugDraw=true;
+    _physicsNode.debugDraw=true;
 }
 
 - (void)onEnter {
@@ -91,13 +91,16 @@ static NSString * const kFirstLevel = @"LevelFinal";
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robot:(CCNode *)robot poo:(CCNode *)poo {
     [poo removeFromParent];
-//    _score++;
-//    _scoreLabel.string = [NSString stringWithFormat:@"%d", _score];
-//    
     [self gameOver];
     return NO;
 }
 
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robot:(CCNode *)robot heart:(CCNode *)heart{
+    [heart removeFromParent];
+        _score++;
+        _scoreLabel.string = [NSString stringWithFormat:@"%d", _score];
+    return NO;
+}
 #pragma mark - Update
 
 - (void)update:(CCTime)delta {
