@@ -70,7 +70,7 @@
 							<key>name</key>
 							<string>spriteFrame</string>
 							<key>time</key>
-							<real>0.033333335071802139</real>
+							<real>0.13333334028720856</real>
 							<key>type</key>
 							<integer>7</integer>
 							<key>value</key>
@@ -88,7 +88,7 @@
 							<key>name</key>
 							<string>spriteFrame</string>
 							<key>time</key>
-							<real>0.066666670143604279</real>
+							<real>0.26666668057441711</real>
 							<key>type</key>
 							<integer>7</integer>
 							<key>value</key>
@@ -106,7 +106,7 @@
 							<key>name</key>
 							<string>spriteFrame</string>
 							<key>time</key>
-							<real>0.10000000149011612</real>
+							<real>0.36666667461395264</real>
 							<key>type</key>
 							<integer>7</integer>
 							<key>value</key>
@@ -132,9 +132,43 @@
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
-		<string></string>
+		<string>_robot</string>
 		<key>memberVarAssignmentType</key>
-		<integer>1</integer>
+		<integer>2</integer>
+		<key>physicsBody</key>
+		<dict>
+			<key>affectedByGravity</key>
+			<true/>
+			<key>allowsRotation</key>
+			<false/>
+			<key>bodyShape</key>
+			<integer>1</integer>
+			<key>collisionCategories</key>
+			<array/>
+			<key>collisionMask</key>
+			<array/>
+			<key>collisionType</key>
+			<string>robot</string>
+			<key>cornerRadius</key>
+			<real>23</real>
+			<key>density</key>
+			<real>5</real>
+			<key>dynamic</key>
+			<true/>
+			<key>elasticity</key>
+			<real>0.5</real>
+			<key>friction</key>
+			<real>0.0099999997764825821</real>
+			<key>points</key>
+			<array>
+				<array>
+					<real>24</real>
+					<real>24</real>
+				</array>
+			</array>
+			<key>polygons</key>
+			<array/>
+		</dict>
 		<key>properties</key>
 		<array>
 			<dict>
@@ -285,17 +319,17 @@
 			<key>chainedSequenceId</key>
 			<integer>0</integer>
 			<key>length</key>
-			<real>0.13333334028720856</real>
+			<real>0.40000000596046448</real>
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.0</real>
+			<real>0.40000000596046448</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
-			<real>128</real>
+			<real>512</real>
 			<key>sequenceId</key>
 			<integer>0</integer>
 			<key>soundChannel</key>
