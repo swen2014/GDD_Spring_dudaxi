@@ -59,7 +59,8 @@ static NSString * const kFirstLevel = @"LevelFinal";
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     [_robot.physicsBody.chipmunkObjects[0] eachArbiter:^(cpArbiter *arbiter) {
         if (!_jumped) {
-            [_robot.physicsBody applyImpulse:ccp(20, 1200)];
+            [_robot.physicsBody applyAngularImpulse:10000.f];
+//            [_robot.physicsBody applyImpulse:ccp(20, 1200)];
             _jumped = TRUE;
             [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.01f];
         }
