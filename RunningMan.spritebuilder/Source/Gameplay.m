@@ -13,7 +13,7 @@
 //#define CP_ALLOW_PRIVATE_ACCESS 1
 
 static NSString *selectedLevel = @"LevelFinal";
-static int levelSpeed = 10;
+static int levelSpeed = 30;
 static NSString * const kFirstLevel = @"LevelFinal";
 //static NSString *selectedLevel = @"Level1";
 //static int levelSpeed = 0;
@@ -35,8 +35,7 @@ static NSString * const kFirstLevel = @"LevelFinal";
     _loadedLevel = (Level *) [CCBReader load:selectedLevel owner:self];
     [_levelNode addChild:_loadedLevel];
     
-    levelSpeed = _loadedLevel.levelSpeed;
-    
+
 //    _physicsNode.debugDraw=true;
 }
 
@@ -46,6 +45,7 @@ static NSString * const kFirstLevel = @"LevelFinal";
     CCActionFollow *follow = [CCActionFollow actionWithTarget:_robot worldBoundary:[_loadedLevel boundingBox]];
     _physicsNode.position = [follow currentOffset];
     [_physicsNode runAction:follow];
+//    [_physicsNode.physicsBody setVelocity:ccpMult(_robot.physicsBody.velocity, -1)];//
 }
 
 - (void)onEnterTransitionDidFinish {
@@ -59,10 +59,14 @@ static NSString * const kFirstLevel = @"LevelFinal";
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     [_robot.physicsBody.chipmunkObjects[0] eachArbiter:^(cpArbiter *arbiter) {
         if (!_jumped) {
-            [_robot.physicsBody applyAngularImpulse:10000.f];
-//            [_robot.physicsBody applyImpulse:ccp(20, 1200)];
+//            [_robot.physicsBody applyAngularImpulse:10000.f];
+            [_robot.physicsBody applyImpulse:ccp(20, 1200)];
+//            [_robot.physicsBody applyForce:ccp(20,1200)];
+//            b2Vec2 vel = body->GetLinearVelocity();
+//            vel.y = 10;//upwards - don't change x velocity
+//            body->SetLinearVelocity( vel );
             _jumped = TRUE;
-            [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.01f];
+            [self performSelector:@selector(resetJump) withObject:nil afterDelay:1.0f];
         }
     }];
 }
@@ -105,6 +109,8 @@ static NSString * const kFirstLevel = @"LevelFinal";
 #pragma mark - Update
 
 - (void)update:(CCTime)delta {
+    _robot.position = ccp(_robot.position.x + delta * levelSpeed, _robot.position.y);
+
     if (CGRectGetMaxY([_robot boundingBox]) <   CGRectGetMinY([_loadedLevel boundingBox])) {
         [self gameOver];
     }
