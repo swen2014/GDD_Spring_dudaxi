@@ -6129,8 +6129,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>263.6234130859375</real>
-							<real>251.78079223632812</real>
+							<real>254.46449279785156</real>
+							<real>253.48191833496094</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -6468,8 +6468,6 @@
 						<string>Robot.ccb</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -6565,6 +6563,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

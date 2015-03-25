@@ -13,7 +13,7 @@
 //#define CP_ALLOW_PRIVATE_ACCESS 1
 
 static NSString *selectedLevel = @"LevelFinal";
-static int levelSpeed = 20;
+static int levelSpeed = 40;
 static NSString * const kFirstLevel = @"LevelFinal";
 //static NSString *selectedLevel = @"Level1";
 //static int levelSpeed = 0;
@@ -61,14 +61,7 @@ static NSString * const kFirstLevel = @"LevelFinal";
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     [_robot.physicsBody.chipmunkObjects[0] eachArbiter:^(cpArbiter *arbiter) {
         if (!_jumped) {
-//            yVel = 20;
-//            xVel = 0.5;
-            
             [_robot.physicsBody applyImpulse:ccp(20, 3000)];
-//            [_robot.physicsBody applyForce:ccp(20,1200)];
-//            b2Vec2 vel = body->GetLinearVelocity();
-//            vel.y = 10;//upwards - don't change x velocity
-//            body->SetLinearVelocity( vel );
             _jumped = TRUE;
             [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.1];
         }
