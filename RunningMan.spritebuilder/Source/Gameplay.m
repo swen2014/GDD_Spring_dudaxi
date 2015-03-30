@@ -20,7 +20,7 @@ static NSString * const kFirstLevel = @"LevelFinal";
 
 
 @implementation Gameplay {
-    CCSprite *_robot;
+    CCSprite *_man;
     CCPhysicsNode *_physicsNode;
     CCNode *_levelNode;
     Level *_loadedLevel;
@@ -44,10 +44,10 @@ static NSString * const kFirstLevel = @"LevelFinal";
 - (void)onEnter {
     [super onEnter];
     
-    CCActionFollow *follow = [CCActionFollow actionWithTarget:_robot worldBoundary:[_loadedLevel boundingBox]];
+    CCActionFollow *follow = [CCActionFollow actionWithTarget:_man worldBoundary:[_loadedLevel boundingBox]];
     _physicsNode.position = [follow currentOffset];
     [_physicsNode runAction:follow];
-//    [_physicsNode.physicsBody setVelocity:ccpMult(_robot.physicsBody.velocity, -1)];//
+//    [_physicsNode.physicsBody setVelocity:ccpMult(_man.physicsBody.velocity, -1)];//
 }
 
 - (void)onEnterTransitionDidFinish {
@@ -59,9 +59,9 @@ static NSString * const kFirstLevel = @"LevelFinal";
 #pragma mark - Touch Handling
 
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    [_robot.physicsBody.chipmunkObjects[0] eachArbiter:^(cpArbiter *arbiter) {
+    [_man.physicsBody.chipmunkObjects[0] eachArbiter:^(cpArbiter *arbiter) {
         if (!_jumped) {
-            [_robot.physicsBody applyImpulse:ccp(20, 3000)];
+            [_man.physicsBody applyImpulse:ccp(5, 500)];
             _jumped = TRUE;
             [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.1];
         }
@@ -76,7 +76,7 @@ static NSString * const kFirstLevel = @"LevelFinal";
 //
 - (void)fixedUpdate:(CCTime)delta
 {
-    _robot.physicsBody.velocity = ccp(levelSpeed, _robot.physicsBody.velocity.y);
+    _man.physicsBody.velocity = ccp(levelSpeed, _man.physicsBody.velocity.y);
 //    _physicsNode.position = ccp(_physicsNode.position.x - (levelSpeed *delta), _physicsNode.position.y);
 }
 
@@ -93,13 +93,13 @@ static NSString * const kFirstLevel = @"LevelFinal";
 //    return YES;
 //}
 
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robot:(CCNode *)robot poo:(CCNode *)poo {
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair man:(CCNode *)man poo:(CCNode *)poo {
     [poo removeFromParent];
     [self gameOver];
     return NO;
 }
 
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robot:(CCNode *)robot heart:(CCNode *)heart{
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair man:(CCNode *)man heart:(CCNode *)heart{
     [heart removeFromParent];
         _score++;
         _scoreLabel.string = [NSString stringWithFormat:@"%d", _score];
@@ -108,9 +108,9 @@ static NSString * const kFirstLevel = @"LevelFinal";
 #pragma mark - Update
 
 - (void)update:(CCTime)delta {
-    _robot.position = ccp(_robot.position.x + delta * levelSpeed, _robot.position.y);
+    _man.position = ccp(_man.position.x + delta * levelSpeed, _man.position.y);
 
-    if (CGRectGetMaxY([_robot boundingBox]) <   CGRectGetMinY([_loadedLevel boundingBox])) {
+    if (CGRectGetMaxY([_man boundingBox]) <   CGRectGetMinY([_loadedLevel boundingBox])) {
         [self gameOver];
     }
 }

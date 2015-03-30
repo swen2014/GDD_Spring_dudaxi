@@ -114,9 +114,43 @@
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
-		<string></string>
+		<string>_man</string>
 		<key>memberVarAssignmentType</key>
-		<integer>1</integer>
+		<integer>2</integer>
+		<key>physicsBody</key>
+		<dict>
+			<key>affectedByGravity</key>
+			<true/>
+			<key>allowsRotation</key>
+			<false/>
+			<key>bodyShape</key>
+			<integer>1</integer>
+			<key>collisionCategories</key>
+			<array/>
+			<key>collisionMask</key>
+			<array/>
+			<key>collisionType</key>
+			<string>man</string>
+			<key>cornerRadius</key>
+			<real>8</real>
+			<key>density</key>
+			<real>20</real>
+			<key>dynamic</key>
+			<true/>
+			<key>elasticity</key>
+			<real>0.10000000149011612</real>
+			<key>friction</key>
+			<real>0.10000000149011612</real>
+			<key>points</key>
+			<array>
+				<array>
+					<real>14.5</real>
+					<real>16</real>
+				</array>
+			</array>
+			<key>polygons</key>
+			<array/>
+		</dict>
 		<key>properties</key>
 		<array>
 			<dict>
