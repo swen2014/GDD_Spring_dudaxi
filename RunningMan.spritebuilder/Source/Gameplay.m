@@ -19,12 +19,16 @@ static NSString * const kFirstLevel = @"LevelFinal";
 //static int levelSpeed = 0;
 
 
+
 @implementation Gameplay {
-    CCSprite *_man;
+    __weak CCSprite *_man;
+    __weak CCSprite *_robot;
+    
     CCPhysicsNode *_physicsNode;
     CCNode *_levelNode;
     Level *_loadedLevel;
     CCLabelTTF *_scoreLabel;
+    
     BOOL _jumped;
     int xVel, yVel;
     int _score;
@@ -34,6 +38,7 @@ static NSString * const kFirstLevel = @"LevelFinal";
     _physicsNode.collisionDelegate = self;
     _loadedLevel = (Level *) [CCBReader load:selectedLevel owner:self];
     [_levelNode addChild:_loadedLevel];
+    
 //    xVel = 0;
 //    yVel = 0;
 //    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(check) userInfo:nil repeats:YES];
@@ -41,12 +46,17 @@ static NSString * const kFirstLevel = @"LevelFinal";
 //    _physicsNode.debugDraw=true;
 }
 
+
 - (void)onEnter {
     [super onEnter];
     
     CCActionFollow *follow = [CCActionFollow actionWithTarget:_man worldBoundary:[_loadedLevel boundingBox]];
     _physicsNode.position = [follow currentOffset];
     [_physicsNode runAction:follow];
+    // access audio object
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    // play background sound
+    [audio playBg:@"True Love Ways.mp3" loop:YES];
 //    [_physicsNode.physicsBody setVelocity:ccpMult(_man.physicsBody.velocity, -1)];//
 }
 
@@ -62,6 +72,11 @@ static NSString * const kFirstLevel = @"LevelFinal";
     [_man.physicsBody.chipmunkObjects[0] eachArbiter:^(cpArbiter *arbiter) {
         if (!_jumped) {
             [_man.physicsBody applyImpulse:ccp(5, 500)];
+            // access audio object
+            OALSimpleAudio *jumpaudio = [OALSimpleAudio sharedInstance];
+            [jumpaudio playEffect:@"suck-01.wav"];
+//            [jumpaudio]
+            // play sound effect
             _jumped = TRUE;
             [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.1];
         }
@@ -92,6 +107,8 @@ static NSString * const kFirstLevel = @"LevelFinal";
 //    
 //    return YES;
 //}
+
+
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair man:(CCNode *)man poo:(CCNode *)poo {
     [poo removeFromParent];

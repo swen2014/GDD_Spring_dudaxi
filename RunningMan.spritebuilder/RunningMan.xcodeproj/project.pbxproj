@@ -66,6 +66,8 @@
 		927F61B9196C771E000F43EF /* iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F590E188484E7003F4D28 /* iPhone@2x.png */; };
 		927F61BA196C771E000F43EF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B737896D180762440076A88C /* Default.png */; };
 		927F61BB196C771E000F43EF /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
+		B0313FBB1AC9C52700C464F8 /* True Love Ways.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B0313FBA1AC9C52700C464F8 /* True Love Ways.mp3 */; };
+		B0313FBD1ACA1E7A00C464F8 /* suck-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = B0313FBC1ACA1E7A00C464F8 /* suck-01.wav */; };
 		B0849F611A9AA2C500BAE66F /* Robot.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F601A9AA2C500BAE66F /* Robot.m */; };
 		B0849F651A9AA31400BAE66F /* Man.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F641A9AA31400BAE66F /* Man.m */; };
 		B0849F6E1A9AB11100BAE66F /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F6D1A9AB11100BAE66F /* Gameplay.m */; };
@@ -199,6 +201,8 @@
 		7AFCD5DD19E9BDC200BCCCDA /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "Source/Bridging-Header.h"; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		927F61BF196C771E000F43EF /* RunningMan Android.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RunningMan Android.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0313FBA1AC9C52700C464F8 /* True Love Ways.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "True Love Ways.mp3"; sourceTree = "<group>"; };
+		B0313FBC1ACA1E7A00C464F8 /* suck-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "suck-01.wav"; path = "../../../../suck-01.wav"; sourceTree = "<group>"; };
 		B0849F5F1A9AA2C500BAE66F /* Robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Robot.h; path = Source/Robot.h; sourceTree = "<group>"; };
 		B0849F601A9AA2C500BAE66F /* Robot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Robot.m; path = Source/Robot.m; sourceTree = "<group>"; };
 		B0849F631A9AA31400BAE66F /* Man.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Man.h; path = Source/Man.h; sourceTree = "<group>"; };
@@ -469,6 +473,16 @@
 			name = libs;
 			sourceTree = "<group>";
 		};
+		B0313FB31AC9C26700C464F8 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				B0313FBC1ACA1E7A00C464F8 /* suck-01.wav */,
+				B0313FBA1AC9C52700C464F8 /* True Love Ways.mp3 */,
+			);
+			name = audio;
+			path = ../../../../audio;
+			sourceTree = "<group>";
+		};
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,6 +574,7 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B0313FB31AC9C26700C464F8 /* audio */,
 				7A40366119DDF8C2007B6E8F /* Platforms */,
 				5B12100D197483EE004C1E1D /* res */,
 				B73789911807667A0076A88C /* Icons */,
@@ -790,6 +805,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
+				B0313FBD1ACA1E7A00C464F8 /* suck-01.wav in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
@@ -799,6 +815,7 @@
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
+				B0313FBB1AC9C52700C464F8 /* True Love Ways.mp3 in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
