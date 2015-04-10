@@ -10,6 +10,7 @@
 #import "Level.h"
 #import "Actionfollow.h"
 #import "CCPhysics+ObjectiveChipmunk.h"
+#import "Man.h"
 //#define CP_ALLOW_PRIVATE_ACCESS 1
 
 static NSString *selectedLevel = @"LevelFinal";
@@ -21,10 +22,10 @@ static NSString * const kFirstLevel = @"LevelFinal";
 
 
 @implementation Gameplay {
-    __weak CCSprite *_man;
+//    __weak CCSprite *_man;
     __weak CCSprite *_robot;
     
-    CCPhysicsNode *_physicsNode;
+//    CCPhysicsNode *_physicsNode;
     CCNode *_levelNode;
     Level *_loadedLevel;
     CCLabelTTF *_scoreLabel;
@@ -46,6 +47,14 @@ static NSString * const kFirstLevel = @"LevelFinal";
 //    _physicsNode.debugDraw=true;
 }
 
+- (void)initialize
+{
+    // your code here
+    man = (Man*)[CCBReader load:@"RunningMan"];
+    [_physicsNode addChild:man];
+//    [self addObstacle];
+//    timeSinceObstacle = 0.0f;
+}
 
 - (void)onEnter {
     [super onEnter];
@@ -55,6 +64,8 @@ static NSString * const kFirstLevel = @"LevelFinal";
     [_physicsNode runAction:follow];
     // access audio object
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    OALSimpleAudio *jumpaudio = [OALSimpleAudio sharedInstance];
+
     // play background sound
     [audio playBg:@"True Love Ways.mp3" loop:YES];
 //    [_physicsNode.physicsBody setVelocity:ccpMult(_man.physicsBody.velocity, -1)];//
@@ -72,9 +83,10 @@ static NSString * const kFirstLevel = @"LevelFinal";
     [_man.physicsBody.chipmunkObjects[0] eachArbiter:^(cpArbiter *arbiter) {
         if (!_jumped) {
             [_man.physicsBody applyImpulse:ccp(5, 500)];
+            [man jump:]
             // access audio object
-            OALSimpleAudio *jumpaudio = [OALSimpleAudio sharedInstance];
-            [jumpaudio playEffect:@"suck-01.wav"];
+//            OALSimpleAudio *jumpaudio = [OALSimpleAudio sharedInstance];
+//            [jumpaudio playEffect:@"jump.wav"];
 //            [jumpaudio]
             // play sound effect
             _jumped = TRUE;

@@ -7,7 +7,12 @@
 //
 
 #import "CCNode.h"
+#import "Man.h"
 
 @interface Gameplay : CCNode <CCPhysicsCollisionDelegate>
-
+{
+    Man* man;
+    CCPhysicsNode* _physicsNode;
+    
+}
 @end

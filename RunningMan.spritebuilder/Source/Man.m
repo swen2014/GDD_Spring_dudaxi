@@ -9,13 +9,23 @@
 #import "Man.h"
 
 @implementation Man
+- (void)didLoadFromCCB{
+    self.position = ccp(115, 250);
+    self.zOrder = DrawingOrderHero;
+}
+
 - (id)init {
     self = [super init];
-    
+
     if (self) {
         CCLOG(@"Man created");
     }
     
     return self;
+}
+
+- (void)jump:(OALSimpleAudio*)jumpaudio{
+    [jumpaudio playEffect:@"jump.wav"];
+    
 }
 @end
