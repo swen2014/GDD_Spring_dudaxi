@@ -68,11 +68,12 @@
 		927F61BB196C771E000F43EF /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B0313FBB1AC9C52700C464F8 /* True Love Ways.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B0313FBA1AC9C52700C464F8 /* True Love Ways.mp3 */; };
 		B079D40E1ACB69BC00D93ACE /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = B079D40D1ACB69BC00D93ACE /* jump.wav */; };
-		B0849F611A9AA2C500BAE66F /* Robot.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F601A9AA2C500BAE66F /* Robot.m */; };
 		B0849F651A9AA31400BAE66F /* Man.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F641A9AA31400BAE66F /* Man.m */; };
 		B0849F6E1A9AB11100BAE66F /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F6D1A9AB11100BAE66F /* Gameplay.m */; };
 		B0849F711A9AB2AA00BAE66F /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F701A9AB2AA00BAE66F /* Level.m */; };
 		B0849F741A9AB91600BAE66F /* Actionfollow.m in Sources */ = {isa = PBXBuildFile; fileRef = B0849F731A9AB91600BAE66F /* Actionfollow.m */; };
+		B08675E61AD879BA00EBB06D /* MainScenePlay.m in Sources */ = {isa = PBXBuildFile; fileRef = B08675E51AD879BA00EBB06D /* MainScenePlay.m */; };
+		B08675EA1AD8805B00EBB06D /* PlayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B08675E91AD8805B00EBB06D /* PlayScene.m */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
 		B71F5913188484E7003F4D28 /* iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5909188484E7003F4D28 /* iPad.png */; };
@@ -203,8 +204,6 @@
 		927F61BF196C771E000F43EF /* RunningMan Android.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RunningMan Android.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0313FBA1AC9C52700C464F8 /* True Love Ways.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "True Love Ways.mp3"; sourceTree = "<group>"; };
 		B079D40D1ACB69BC00D93ACE /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = jump.wav; path = ../../../../jump.wav; sourceTree = "<group>"; };
-		B0849F5F1A9AA2C500BAE66F /* Robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Robot.h; path = Source/Robot.h; sourceTree = "<group>"; };
-		B0849F601A9AA2C500BAE66F /* Robot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Robot.m; path = Source/Robot.m; sourceTree = "<group>"; };
 		B0849F631A9AA31400BAE66F /* Man.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Man.h; path = Source/Man.h; sourceTree = "<group>"; };
 		B0849F641A9AA31400BAE66F /* Man.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Man.m; path = Source/Man.m; sourceTree = "<group>"; };
 		B0849F6C1A9AB11100BAE66F /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gameplay.h; path = Source/Gameplay.h; sourceTree = "<group>"; };
@@ -213,6 +212,10 @@
 		B0849F701A9AB2AA00BAE66F /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Level.m; path = Source/Level.m; sourceTree = "<group>"; };
 		B0849F721A9AB91600BAE66F /* Actionfollow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Actionfollow.h; path = Source/Actionfollow.h; sourceTree = "<group>"; };
 		B0849F731A9AB91600BAE66F /* Actionfollow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Actionfollow.m; path = Source/Actionfollow.m; sourceTree = "<group>"; };
+		B08675E41AD879BA00EBB06D /* MainScenePlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScenePlay.h; path = Source/MainScenePlay.h; sourceTree = "<group>"; };
+		B08675E51AD879BA00EBB06D /* MainScenePlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainScenePlay.m; path = Source/MainScenePlay.m; sourceTree = "<group>"; };
+		B08675E81AD8805B00EBB06D /* PlayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayScene.h; path = Source/PlayScene.h; sourceTree = "<group>"; };
+		B08675E91AD8805B00EBB06D /* PlayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayScene.m; path = Source/PlayScene.m; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
 		B71F5909188484E7003F4D28 /* iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPad.png; path = Icons/iPad.png; sourceTree = "<group>"; };
@@ -486,10 +489,12 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B08675E81AD8805B00EBB06D /* PlayScene.h */,
+				B08675E91AD8805B00EBB06D /* PlayScene.m */,
+				B08675E41AD879BA00EBB06D /* MainScenePlay.h */,
+				B08675E51AD879BA00EBB06D /* MainScenePlay.m */,
 				B0849F631A9AA31400BAE66F /* Man.h */,
 				B0849F641A9AA31400BAE66F /* Man.m */,
-				B0849F5F1A9AA2C500BAE66F /* Robot.h */,
-				B0849F601A9AA2C500BAE66F /* Robot.m */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				B0849F721A9AB91600BAE66F /* Actionfollow.h */,
 				B0849F731A9AB91600BAE66F /* Actionfollow.m */,
@@ -903,12 +908,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0849F611A9AA2C500BAE66F /* Robot.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				B0849F741A9AB91600BAE66F /* Actionfollow.m in Sources */,
 				B0849F651A9AA31400BAE66F /* Man.m in Sources */,
+				B08675EA1AD8805B00EBB06D /* PlayScene.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
+				B08675E61AD879BA00EBB06D /* MainScenePlay.m in Sources */,
 				B0849F711A9AB2AA00BAE66F /* Level.m in Sources */,
 				B0849F6E1A9AB11100BAE66F /* Gameplay.m in Sources */,
 			);

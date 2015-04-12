@@ -9,5 +9,5 @@
 #import "CCSprite.h"
 
 @interface Man : CCSprite
-
+-(void)jump;
 @end
