@@ -38,14 +38,5 @@
     }
 }
 
-// put new methods here
-//- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-//    // this will get called every time the player touches the screen
-//    [man jump];
-//}
-
-//- (void)update:(CCTime)delta {
-//    _man.position = ccp(_man.position.x + delta * scrollSpeed, _man.position.y);
-//}
 
 @end

@@ -49,7 +49,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>angrypoo</string>
+				<string>letterI</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -59,7 +59,7 @@
 					<key>affectedByGravity</key>
 					<true/>
 					<key>allowsRotation</key>
-					<false/>
+					<true/>
 					<key>bodyShape</key>
 					<integer>0</integer>
 					<key>collisionCategories</key>
@@ -67,7 +67,7 @@
 					<key>collisionMask</key>
 					<array/>
 					<key>collisionType</key>
-					<string>poo</string>
+					<string>i</string>
 					<key>cornerRadius</key>
 					<real>0.0</real>
 					<key>density</key>
@@ -81,56 +81,40 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>0.93153226375579834</real>
-							<real>10.37039852142334</real>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 						<array>
-							<real>-4.3319277763366699</real>
-							<real>19.966960906982422</real>
+							<real>0.0</real>
+							<real>32</real>
 						</array>
 						<array>
-							<real>8.8370027542114258</real>
-							<real>42.69647216796875</real>
+							<real>11</real>
+							<real>32</real>
 						</array>
 						<array>
-							<real>33.139385223388672</real>
-							<real>58.178447723388672</real>
-						</array>
-						<array>
-							<real>55.958850860595703</real>
-							<real>47.18377685546875</real>
-						</array>
-						<array>
-							<real>62.512474060058594</real>
-							<real>9.9412002563476562</real>
+							<real>11</real>
+							<real>0.0</real>
 						</array>
 					</array>
 					<key>polygons</key>
 					<array>
 						<array>
 							<array>
-								<real>62.512474060058594</real>
-								<real>9.9412002563476562</real>
+								<real>11</real>
+								<real>0.0</real>
 							</array>
 							<array>
-								<real>55.958850860595703</real>
-								<real>47.18377685546875</real>
+								<real>11</real>
+								<real>32</real>
 							</array>
 							<array>
-								<real>33.139385223388672</real>
-								<real>58.178447723388672</real>
+								<real>0.0</real>
+								<real>32</real>
 							</array>
 							<array>
-								<real>8.8370027542114258</real>
-								<real>42.69647216796875</real>
-							</array>
-							<array>
-								<real>-4.3319277763366699</real>
-								<real>19.966960906982422</real>
-							</array>
-							<array>
-								<real>0.93153226375579834</real>
-								<real>10.37039852142334</real>
+								<real>0.0</real>
+								<real>0.0</real>
 							</array>
 						</array>
 					</array>
@@ -152,8 +136,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>17</real>
-							<real>-10</real>
+							<real>28</real>
+							<real>6</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -191,7 +175,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/angrypoo.png</string>
+							<string>Asset/Letter/letterI.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -232,7 +216,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string></string>
+		<string>Letter</string>
 		<key>displayName</key>
 		<string>CCNode</string>
 		<key>memberVarAssignmentName</key>
