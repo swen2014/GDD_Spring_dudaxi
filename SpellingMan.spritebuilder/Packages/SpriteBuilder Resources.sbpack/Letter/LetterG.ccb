@@ -24,9 +24,9 @@
 	<key>fileVersion</key>
 	<integer>4</integer>
 	<key>gridspaceHeight</key>
-	<integer>36</integer>
+	<integer>64</integer>
 	<key>gridspaceWidth</key>
-	<integer>35</integer>
+	<integer>64</integer>
 	<key>guides</key>
 	<array/>
 	<key>joints</key>
@@ -49,7 +49,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>letterA</string>
+				<string>letterG</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -61,15 +61,15 @@
 					<key>allowsRotation</key>
 					<true/>
 					<key>bodyShape</key>
-					<integer>1</integer>
+					<integer>0</integer>
 					<key>collisionCategories</key>
 					<array/>
 					<key>collisionMask</key>
 					<array/>
 					<key>collisionType</key>
-					<string>a</string>
+					<string>g</string>
 					<key>cornerRadius</key>
-					<real>22</real>
+					<real>0.0</real>
 					<key>density</key>
 					<real>1</real>
 					<key>dynamic</key>
@@ -81,12 +81,43 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>15</real>
-							<real>16</real>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+						<array>
+							<real>0.0</real>
+							<real>33</real>
+						</array>
+						<array>
+							<real>26</real>
+							<real>33</real>
+						</array>
+						<array>
+							<real>26</real>
+							<real>0.0</real>
 						</array>
 					</array>
 					<key>polygons</key>
-					<array/>
+					<array>
+						<array>
+							<array>
+								<real>26</real>
+								<real>0.0</real>
+							</array>
+							<array>
+								<real>26</real>
+								<real>33</real>
+							</array>
+							<array>
+								<real>0.0</real>
+								<real>33</real>
+							</array>
+							<array>
+								<real>0.0</real>
+								<real>0.0</real>
+							</array>
+						</array>
+					</array>
 				</dict>
 				<key>properties</key>
 				<array>
@@ -105,8 +136,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>19</real>
-							<real>-4</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -144,7 +175,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Letter/letterA.png</string>
+							<string>Asset/Letter/letterG.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -185,7 +216,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string>Letter</string>
+		<string></string>
 		<key>displayName</key>
 		<string>CCNode</string>
 		<key>memberVarAssignmentName</key>

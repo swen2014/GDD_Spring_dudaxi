@@ -63,6 +63,7 @@
 		927F61B9196C771E000F43EF /* iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F590E188484E7003F4D28 /* iPhone@2x.png */; };
 		927F61BA196C771E000F43EF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B737896D180762440076A88C /* Default.png */; };
 		927F61BB196C771E000F43EF /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
+		B0233C691ADD9F9F00DDD30E /* Lose.m in Sources */ = {isa = PBXBuildFile; fileRef = B0233C681ADD9F9F00DDD30E /* Lose.m */; };
 		B08675F91AD89F5A00EBB06D /* GamePlayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B08675F81AD89F5A00EBB06D /* GamePlayScene.m */; };
 		B08675FD1AD8A47500EBB06D /* Man.m in Sources */ = {isa = PBXBuildFile; fileRef = B08675FC1AD8A47500EBB06D /* Man.m */; };
 		B08676001AD8B0C900EBB06D /* GamePlay.m in Sources */ = {isa = PBXBuildFile; fileRef = B08675FF1AD8B0C900EBB06D /* GamePlay.m */; };
@@ -172,6 +173,8 @@
 		7BF6AF9F1A425F9800FFF9BA /* JavaFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaFoundation.framework; path = "../../../../../../../Library/SBAndroid/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/JavaFoundation.framework"; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		927F61BF196C771E000F43EF /* SpellingMan Android.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SpellingMan Android.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0233C671ADD9F9F00DDD30E /* Lose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lose.h; path = Source/Lose.h; sourceTree = "<group>"; };
+		B0233C681ADD9F9F00DDD30E /* Lose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lose.m; path = Source/Lose.m; sourceTree = "<group>"; };
 		B08675F71AD89F5A00EBB06D /* GamePlayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamePlayScene.h; path = Source/GamePlayScene.h; sourceTree = "<group>"; };
 		B08675F81AD89F5A00EBB06D /* GamePlayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GamePlayScene.m; path = Source/GamePlayScene.m; sourceTree = "<group>"; };
 		B08675FB1AD8A47500EBB06D /* Man.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Man.h; path = Source/Man.h; sourceTree = "<group>"; };
@@ -467,6 +470,8 @@
 				B086760E1AD8BF0400EBB06D /* Level.m */,
 				B0F8EE2D1ADB1BD300185BA8 /* Letter.h */,
 				B0F8EE2E1ADB1BD300185BA8 /* Letter.m */,
+				B0233C671ADD9F9F00DDD30E /* Lose.h */,
+				B0233C681ADD9F9F00DDD30E /* Lose.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -841,6 +846,7 @@
 				B08675F91AD89F5A00EBB06D /* GamePlayScene.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				B08675FD1AD8A47500EBB06D /* Man.m in Sources */,
+				B0233C691ADD9F9F00DDD30E /* Lose.m in Sources */,
 				B08676001AD8B0C900EBB06D /* GamePlay.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				B086760F1AD8BF0400EBB06D /* Level.m in Sources */,

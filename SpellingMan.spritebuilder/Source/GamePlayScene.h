@@ -12,8 +12,8 @@
 @interface GamePlayScene : CCNode
 {
 // define variables here;
-Man*     man;
-CCPhysicsNode *_physicsNode;
+//Man*     man;
+//CCPhysicsNode *_physicsNode;
 float timeSinceObstacle;
 }
 

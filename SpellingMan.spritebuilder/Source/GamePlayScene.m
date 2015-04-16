@@ -18,7 +18,7 @@
 //    man = (Man*)[CCBReader load:@"Man"];
 //    [_physicsNode addChild:man];
 //    [self addObstacle];
-    timeSinceObstacle = 0.0f;
+//    timeSinceObstacle = 0.0f;
 }
 
 -(void)update:(CCTime)delta

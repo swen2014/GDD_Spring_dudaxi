@@ -3,8 +3,8 @@
 @implementation MainScene
 
 -(void) Start{
-    NSLog(@"Start Button OK");
-    CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
+//    NSLog(@"Start Button OK");
+    CCScene *gameplayScene = [CCBReader loadAsScene:@"GamePlay"];
     [[CCDirector sharedDirector] replaceScene:gameplayScene];
 }
 

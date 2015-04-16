@@ -12,8 +12,9 @@
 #import "Level.h"
 #import "test.h"
 #import "Letter.h"
+#import "Lose.h"
 //
-static const CGFloat scrollSpeed = 80.f;
+static const CGFloat scrollSpeed = 140.f;
 static NSString *selectedLevel = @"test1";
 
 @implementation GamePlay{
@@ -32,16 +33,21 @@ static NSString *selectedLevel = @"test1";
     
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_goalLabel;
+    CCLabelTTF *_countLabel;
     
     BOOL _jumped;
     BOOL _gameOver;
+    BOOL _gameWin;
+    BOOL _stop;
     
     CCNode *_ground1;
     CCNode *_ground2;
     NSArray *_grounds;
     
+//    NSMutableString *goal;
     NSMutableString *word;
-    NSString *_word;
+    NSString *goal;
+    int score;
 }
 
 - (void)didLoadFromCCB
@@ -59,16 +65,13 @@ static NSString *selectedLevel = @"test1";
     _man = (Man *)[CCBReader load:@"Man"];
     [_physicsNode addChild:_man];
     
-//    word = @"Your:";
-    word = [[NSMutableString alloc] initWithCapacity:10];
 
-    
-    // your code here
-//    NSLog(@"MAN Find, level1 %@, level2 %@", NSStringFromCGPoint(_level1Node.position), NSStringFromCGPoint(_level2Node.position));
-//    NSLog(@"size %@, %@", NSStringFromCGSize(_level1.contentSize), NSStringFromCGSize(_level2.contentSize));
+    word = [[NSMutableString alloc] initWithCapacity:10];
     
     _grounds = @[_ground1, _ground2];
     _levels = @[_level1Node, _level2Node];
+    
+    [self solution];
 //    NSLog(@"%@", _levels);
     
 //    [_physicsNode addChild:_man];
@@ -77,12 +80,30 @@ static NSString *selectedLevel = @"test1";
     
 }
 
+- (void) solution{
+//    NSLog(@"Solution");
+    goal = @"RI";
+//    [goal appendString: @"RA"];
+    _goalLabel.string = [NSString stringWithFormat:@"%@", goal];
+}
+
+- (void)check{
+    NSUInteger len = [word length];
+    NSUInteger len1 = [goal length];
+    if (len > len1) {
+        _gameOver = YES;
+    }else{
+    _gameWin = [goal isEqualToString:word];
+//    return _gameWin;
+    if (_gameWin) {
+        score++;
+        _countLabel.string = [NSString stringWithFormat:@"%d", score];
+    }
+    }
+}
+
 -(void)update:(CCTime)delta
 {
-//    NSLog(@" level screen %@, %@", NSStringFromCGPoint(_man.position), NSStringFromCGPoint(_levelNode.position));
-    
-//    NSLog(@" man physics node %@, physics world: %@", NSStringFromCGPoint(_man.physicsBody.velocity), NSStringFromCGPoint(_physicsNode.position));
-    
     // Move the LevelNode to shift left
     _man.position = ccp(100, _man.position.y);
     _levelNode.position = ccp(_levelNode.position.x - (scrollSpeed * delta), _levelNode.position.y);
@@ -93,8 +114,6 @@ static NSString *selectedLevel = @"test1";
         CGPoint groundWorldPosition = [_levelNode convertToWorldSpace:ground.position];
         // get the screen position of the ground
         CGPoint groundScreenPosition = [self convertToNodeSpace:groundWorldPosition];
-//        NSLog(@"ground screen %@, %.2f", NSStringFromCGPoint(groundScreenPosition),ground.contentSize.width);
-//        NSLog(@"gorund %@",NSStringFromCGPoint(ground.position));
         // if the left corner is one complete width off the screen, move it to the right
         if (groundScreenPosition.x <= (-1.1 * ground.contentSize.width)) {
             ground.position = ccp(ground.position.x + 2 * ground.contentSize.width, ground.position.y);
@@ -106,9 +125,7 @@ static NSString *selectedLevel = @"test1";
         CGPoint levelScreenPosition = [self convertToNodeSpace:levelWorldPosition];
 
         if (levelScreenPosition.x <= (-1 * _level1.contentSize.width)) {
-            //            NSLog(@"leve screen %@, %@", NSStringFromCGPoint(levelScreenPosition), NSStringFromCGPoint(_levelNode.position));
             _level1Node.position = ccp(_level1Node.position.x + 2 * _level1.contentSize.width, _level1Node.position.y);
-//            _level1Node
             [_level1Node removeChild:_level1];
             _level1 = (Level *) [CCBReader load:@"Level2" owner:self];
             [_level1Node addChild:_level1];
@@ -118,17 +135,27 @@ static NSString *selectedLevel = @"test1";
     {
         @try
         {
-            _man.physicsBody.velocity = ccp(80.f, clampf(_man.physicsBody.velocity.y, -MAXFLOAT, 120.f));
-//
-//            [super update:delta];
+            _man.physicsBody.velocity = ccp(0, clampf(_man.physicsBody.velocity.y, -MAXFLOAT, 150.f));
         }
         @catch(NSException* ex)
         {
             
         }
+    }else{
+        self.paused = YES;
+        
+        Lose *popup = (Lose *)[CCBReader load:@"Lose" owner:self];
+        popup.positionType = CCPositionTypeNormalized;
+        popup.position = ccp(0.5, 0.5);
+        [self addChild:popup];
     }
     
-    if (CGRectGetMaxY([_man boundingBox]) <   CGRectGetMinY([_loadedLevel boundingBox])) {
+    if (_gameWin) {
+        [word setString:@""];
+//        NSLog(@"HAHAHAHA");
+    }
+    
+    if (CGRectGetMaxY([_man boundingBox]) < CGRectGetMinY([_loadedLevel boundingBox])) {
         [self gameOver];
     }
 }
@@ -138,28 +165,34 @@ static NSString *selectedLevel = @"test1";
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     // this will get called every time the player touches the screen
     if (!_jumped) {
-        _man.physicsBody.velocity = ccp(0,500);
+        _man.physicsBody.velocity = ccp(0,2500);
         OALSimpleAudio *jumpaudio = [OALSimpleAudio sharedInstance];
         [jumpaudio playEffect:@"jump.wav"];
         _jumped = TRUE;
-        [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.3f];
+        [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.03f];
     }
-//    [_man.physicsBody applyImpulse:ccp(0, 1000.f)];
-//    float yVelocity = clampf(_man.physicsBody.velocity.y, -1 * MAXFLOAT, 200.f);
-//    _man.physicsBody.velocity = ccp(0, yVelocity);
-//    [_man jump];
 }
 
 - (void)resetJump{
     _jumped = FALSE;
 }
 
--(void) Restart{
+-(void)Restart{
     [self gameOver];
 }
 
+- (void)Pause{
+    if (!_stop) {
+        self.paused = YES;
+        _stop = YES;
+    }else{
+        self.paused = NO;
+        _stop = NO;
+    }
+}
+
 - (void)gameOver {
-    CCScene *restartScene = [CCBReader loadAsScene:@"Gameplay"];
+    CCScene *restartScene = [CCBReader loadAsScene:@"GamePlay"];
     CCTransition *transition = [CCTransition transitionFadeWithDuration:0.8f];
     [[CCDirector sharedDirector] presentScene:restartScene withTransition:transition];
 }
@@ -171,6 +204,7 @@ static NSString *selectedLevel = @"test1";
     NSString *letter = @"A";
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
+    [self check];
     return NO;
 }
 
@@ -179,6 +213,7 @@ static NSString *selectedLevel = @"test1";
     NSString *letter = @"B";
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
+    [self check];
     return NO;
 }
 
@@ -187,6 +222,7 @@ static NSString *selectedLevel = @"test1";
     NSString *letter = @"R";
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
+    [self check];
     return NO;
 }
 
@@ -195,6 +231,7 @@ static NSString *selectedLevel = @"test1";
     NSString *letter = @"I";
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
+    [self check];
     return NO;
 }
 
