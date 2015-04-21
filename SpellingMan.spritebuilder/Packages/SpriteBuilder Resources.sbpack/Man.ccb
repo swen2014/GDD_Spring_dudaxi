@@ -138,7 +138,7 @@
 			<key>dynamic</key>
 			<true/>
 			<key>elasticity</key>
-			<real>0.30000001192092896</real>
+			<real>0.10000000149011612</real>
 			<key>friction</key>
 			<real>0.0</real>
 			<key>points</key>
@@ -148,12 +148,12 @@
 					<real>9.5488557815551758</real>
 				</array>
 				<array>
-					<real>19.023551940917969</real>
-					<real>21.065946578979492</real>
+					<real>-3.074249267578125</real>
+					<real>12.539031982421875</real>
 				</array>
 				<array>
-					<real>13.282926559448242</real>
-					<real>39.785060882568359</real>
+					<real>0.828094482421875</real>
+					<real>41.402313232421875</real>
 				</array>
 				<array>
 					<real>11.824188232421875</real>
@@ -164,8 +164,8 @@
 					<real>67.304656982421875</real>
 				</array>
 				<array>
-					<real>45.041305541992188</real>
-					<real>27.738855361938477</real>
+					<real>65.824188232421875</real>
+					<real>10.539031982421875</real>
 				</array>
 				<array>
 					<real>37.111442565917969</real>
@@ -176,26 +176,12 @@
 			<array>
 				<array>
 					<array>
-						<real>19.023551940917969</real>
-						<real>21.065946578979492</real>
-					</array>
-					<array>
-						<real>16.670661926269531</real>
-						<real>9.5488557815551758</real>
-					</array>
-					<array>
-						<real>37.111442565917969</real>
-						<real>9.7226543426513672</real>
-					</array>
-				</array>
-				<array>
-					<array>
 						<real>37.111442565917969</real>
 						<real>9.7226543426513672</real>
 					</array>
 					<array>
-						<real>45.041305541992188</real>
-						<real>27.738855361938477</real>
+						<real>65.824188232421875</real>
+						<real>10.539031982421875</real>
 					</array>
 					<array>
 						<real>52.109344482421875</real>
@@ -206,12 +192,16 @@
 						<real>66.609344482421875</real>
 					</array>
 					<array>
-						<real>13.282926559448242</real>
-						<real>39.785060882568359</real>
+						<real>0.828094482421875</real>
+						<real>41.402313232421875</real>
 					</array>
 					<array>
-						<real>19.023551940917969</real>
-						<real>21.065946578979492</real>
+						<real>-3.074249267578125</real>
+						<real>12.539031982421875</real>
+					</array>
+					<array>
+						<real>16.670661926269531</real>
+						<real>9.5488557815551758</real>
 					</array>
 				</array>
 			</array>

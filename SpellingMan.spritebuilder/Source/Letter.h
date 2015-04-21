@@ -9,5 +9,5 @@
 #import "CCNode.h"
 
 @interface Letter : CCNode
-
+-(void)toString;
 @end

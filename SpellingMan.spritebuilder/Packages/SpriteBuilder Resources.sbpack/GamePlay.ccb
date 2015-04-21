@@ -1184,7 +1184,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.10000000149011612</real>
+							<real>0.15457744896411896</real>
 							<real>0.10000000149011612</real>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -1222,7 +1222,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Your Anser</string>
+							<string>Your Answer</string>
 							<false/>
 						</array>
 					</dict>
@@ -1232,7 +1232,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Chalkduster</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1404,7 +1404,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.2253522127866745</real>
+							<real>0.36443671584129333</real>
 							<real>0.10000000149011612</real>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -1442,7 +1442,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Goal</string>
+							<string>Goal:</string>
 							<false/>
 						</array>
 					</dict>
@@ -1452,7 +1452,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Chalkduster</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1624,7 +1624,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.32042264938354492</real>
+							<real>0.63556349277496338</real>
 							<real>0.10000000149011612</real>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -1662,8 +1662,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>0
-</string>
+							<string>Word Completed: 0</string>
 							<false/>
 						</array>
 					</dict>
