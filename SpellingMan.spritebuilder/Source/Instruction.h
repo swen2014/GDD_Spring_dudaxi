@@ -1,14 +1,13 @@
 //
-//  GamePlayScene.h
+//  Instruction.h
 //  SpellingMan
 //
-//  Created by steven on 4/10/15.
+//  Created by steven on 4/22/15.
 //  Copyright (c) 2015 Apportable. All rights reserved.
 //
 
 #import "CCNode.h"
-#import "Man.h"
 
-@interface GamePlayScene : CCNode
+@interface Instruction : CCNode
 
 @end

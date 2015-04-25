@@ -7,15 +7,18 @@
 //
 
 #import "GamePlay.h"
-#import "GamePlayScene.h"
 #import "Man.h"
 #import "Level.h"
 #import "test.h"
 #import "Letter.h"
 #import "Lose.h"
+#import "Instruction.h"
+
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 //
-static const CGFloat scrollSpeed = 140.f;
-static NSString *selectedLevel = @"test1";
+static const CGFloat scrollSpeed = 160.f;
 
 @implementation GamePlay{
     Man *_man;
@@ -26,7 +29,6 @@ static NSString *selectedLevel = @"test1";
     CCNode *_level1Node;
     CCNode *_level2Node;
 
-    Level *_loadedLevel;
     Level *_level1;
     Level *_level2;
     
@@ -36,7 +38,7 @@ static NSString *selectedLevel = @"test1";
     
     BOOL _jumped;
     BOOL _gameOver;
-    BOOL _gameWin;
+    BOOL _begin;
     BOOL _stop;// Flag to determined if the game pause or not
     
     CCNode *_ground1;
@@ -46,15 +48,19 @@ static NSString *selectedLevel = @"test1";
     NSMutableArray *_letters1;
     NSMutableArray *_letters2;
     
+    NSArray *data;
     NSMutableString *word;
     NSString *goal;
+    NSMutableArray *solution;
+    char solution1[10];
     int score;
     
-    float timeSince;
-    CGFloat screenHeight;
-    CGFloat screenWidth;
-    
     NSMutableArray *offScreen;
+    
+    CCButton *pause;
+    CCButton *ok;
+    
+    Instruction *guide;
 }
 
 - (void)didLoadFromCCB
@@ -62,10 +68,9 @@ static NSString *selectedLevel = @"test1";
     self.userInteractionEnabled = TRUE;
     _physicsNode.collisionDelegate = self;
     
-    _loadedLevel = (Level *) [CCBReader load:selectedLevel owner:self];
-    _level1 = (Level *) [CCBReader load:@"Levels/Level1" owner:self];
+    _level1 = (Level *) [CCBReader load:@"Levels/Level4" owner:self];
     _level2 = (Level *) [CCBReader load:@"Levels/Level2" owner:self];
-    [_levelNode addChild:_loadedLevel];
+
     [_level1Node addChild:_level1];
     [_level2Node addChild:_level2];
     
@@ -73,65 +78,66 @@ static NSString *selectedLevel = @"test1";
     [_physicsNode addChild:_man];
     
     [self initilization];
-    [self solution];
-//    [self dirHome];
-//    [self readFile];
+    
+    [self instruction];
+    
+    [self generateWord:data];
 }
 
 - (void)initilization{
     word = [[NSMutableString alloc] initWithCapacity:10];
-    _grounds = @[_ground1, _ground2];
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    screenHeight = screenRect.size.height;
-    screenWidth = screenRect.size.width;
+        
+    data = [[NSArray alloc] initWithObjects:@"cmu", @"dudaxi",@"wendy", @"jeremy", @"curry",
+            @"dion", @"larson",@"sv",nil];
+    solution = [NSMutableArray array];
+//    [[OALSimpleAudio sharedInstance] playBg:@"Mantis.mp3" loop:YES];
     
     _letters1 = [NSMutableArray array];
     _letters2 = [NSMutableArray array];
+    _grounds = @[_ground1, _ground2];
 }
 
-////读文件
-//-(void)readFile{
-//    NSString *documentsPath =[self dirDoc];
-////    NSString *testDirectory = [documentsPath stringByAppendingPathComponent:@"test"];
-//    NSString *testPath = [documentsPath stringByAppendingPathComponent:@"test_word.txt"];
-//    //    NSData *data = [NSData dataWithContentsOfFile:testPath];
-//    //    NSLog(@"文件读取成功: %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-//    NSString *content=[NSString stringWithContentsOfFile:testPath encoding:NSUTF8StringEncoding error:nil];
-//    
-//    NSString *textFileContents = [NSString stringWithContentsOfFile:[[NSBundle mainBundle]
-//                                  pathForResource:@"text_word"
-//                                  ofType:@"txt"]
-//                                  encoding:NSUTF8StringEncoding
-//                                  error: nil];
-//    // If there are no results, something went wrong
-//    if (textFileContents == nil) {
-//        // an error occurred
-//        NSLog(@"Error reading text file.");
-//    }
-//    NSArray *lines = [textFileContents componentsSeparatedByString:@""];
-////    NSLog(@"Number of lines in the file:%d", [lines count] );
-////    NSLog(@"文件读取成功: %@",content);
-//}
-//
-////获取Documents目录
-//-(NSString *)dirDoc{
-//    //[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-////    NSLog(@"app_home_doc: %@",documentsDirectory);
-//    return documentsDirectory;
-//}
-//
-//-(void)dirHome{
-//    NSString *dirHome=NSHomeDirectory();
-////    NSLog(@"app_home: %@",dirHome);
-//}
+#pragma mark - Guide Scene
+
+- (void)instruction{
+    guide = (Instruction *) [CCBReader load:@"Guide" owner:self];
+    [self addChild:guide];
+    pause.enabled = NO;
+    self.userInteractionEnabled = FALSE;
+    self.paused = YES;
+    _begin = FALSE;
+}
+
+// Button OK
+-(void)OK {
+    _begin = TRUE;
+    [guide removeFromParent];
+    pause.enabled = YES;
+    self.userInteractionEnabled = TRUE;
+    self.paused = NO;
+//    [_physicsNode addChild:_man];
+}
+
 
 #pragma mark - Word Matching
 
-- (void) solution{
-    goal = @"RIB";
-    _goalLabel.string = [NSString stringWithFormat:@"Goal:%@", goal];
+- (void)generateWord:(NSArray *)resource{
+    int num = (arc4random() % resource.count);
+    goal = [resource objectAtIndex:num];
+    NSString *cap = [goal uppercaseString];
+    for (int i=0; i < cap.length; i++) {
+        char c = [cap characterAtIndex:i];
+        [solution addObject:[NSString stringWithFormat:@"%c",c]];
+    }
+    _goalLabel.string = [NSString stringWithFormat:@"Goal:%@", cap];
+}
+
+- (void)removeExist
+{
+    NSString *temp = [NSString stringWithFormat:@"%@", word ];
+    for (int i= 0; i<word.length; i++) {
+        [solution removeObject:[NSString stringWithFormat:@"%c", [temp characterAtIndex:i]]];
+    }
 }
 
 - (void)check{
@@ -139,19 +145,31 @@ static NSString *selectedLevel = @"test1";
     NSUInteger len1 = [goal length];
     if (len > len1) {
         _gameOver = YES;
-    }else if(len <= len1){
-      
     }
-    else{
-    _gameWin = [goal isEqualToString:word];
+    if(len < len1){
+        if ([ [goal uppercaseString] hasPrefix:word]) {
+        }else{
+            _gameOver = YES;
+        }
+    }
+    if (len == len1)
+{    BOOL _gameWin = [[goal uppercaseString] isEqualToString:word];
     if (_gameWin) {
         score++;
-        _countLabel.string = [NSString stringWithFormat:@"Words Completed: %d", score];
+        _countLabel.string = [NSString stringWithFormat:@"%d", score];
         [word setString:@""];
         _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
+        [solution removeAllObjects];
+        NSLog(@"word:%@", word);
+        NSLog(@"solution %@", [solution lastObject]);
+        [self generateWord:data];
+    }else{
+        _gameOver = YES;
     }
     }
 }
+
+#pragma mark - update
 
 -(void)update:(CCTime)delta
 {
@@ -171,9 +189,12 @@ static NSString *selectedLevel = @"test1";
         }
     }
     
+    // loop the scene and load different level
     [self BGReplace1];
     [self BGReplace2];
     
+    
+    // remove the out screen letters
     offScreen = nil;
     
     for (CCNode *letter in _letters1) {
@@ -190,7 +211,6 @@ static NSString *selectedLevel = @"test1";
     for (CCNode *letter in _letters2) {
         CGPoint WorldPosition = [_level2Node convertToWorldSpace:letter.position];
         CGPoint letterScreenPosition = [self convertToNodeSpace:WorldPosition];
-//        NSLog(@"%@", NSStringFromCGPoint(letterScreenPosition));
         
         if (letterScreenPosition.x < 0) {
             if (!offScreen) {
@@ -201,11 +221,11 @@ static NSString *selectedLevel = @"test1";
     }
 
     for (CCNode *letterToRemove in offScreen) {
-        NSLog(@"Delete");
         [letterToRemove removeFromParent];
         if ([_letters1 containsObject:letterToRemove]) {
             [_letters1 removeObject:letterToRemove];
-        }else{
+        }
+        if([_letters2 containsObject:letterToRemove]){
             [_letters2 removeObject:letterToRemove];
         }
     }
@@ -215,15 +235,10 @@ static NSString *selectedLevel = @"test1";
     {
         @try
         {
-            _man.physicsBody.velocity = ccp(0, clampf(_man.physicsBody.velocity.y, -MAXFLOAT, 260.f));
-            timeSince += delta;
-            if (timeSince > 4.3f) {
-//                [self addLetter:210.0f];
-//                [self addLetter:100.0f];
-                timeSince = 0.0f;
-            }
+            _man.physicsBody.velocity = ccp(0, clampf(_man.physicsBody.velocity.y, -MAXFLOAT, 290.f));
+            [self removeExist];
         }
-        @catch(NSException* ex)
+    @catch(NSException* ex)
         {
             
         }
@@ -231,19 +246,7 @@ static NSString *selectedLevel = @"test1";
         self.paused = YES;
         [self LosePopup];
     }
-    
-    if (CGRectGetMaxY([_man boundingBox]) < CGRectGetMinY([_loadedLevel boundingBox])) {
-        [self gameOver];
-    }
 }
-
--(void)LosePopup{
-    Lose *popup = (Lose *)[CCBReader load:@"Lose" owner:self];
-    popup.positionType = CCPositionTypeNormalized;
-    popup.position = ccp(0.5, 0.5);
-    [self addChild:popup];
-}
-
 
 -(void)BGReplace1{
     // loop the level node to create infinite scene
@@ -253,12 +256,12 @@ static NSString *selectedLevel = @"test1";
     if (levelScreenPosition.x <= (-1 * _level1.contentSize.width)) {
         _level1Node.position = ccp(_level1Node.position.x + 2 * _level1.contentSize.width, _level1Node.position.y);
         [_level1Node removeChild:_level1];
-        int levelNum = (arc4random() % 3) + 1;
+        int levelNum = (arc4random() % 2) + 1;
         NSString *name = [NSString stringWithFormat: @"Levels/Level%d", levelNum];
         _level1 = (Level *) [CCBReader load:name owner:self];
         [_level1Node addChild:_level1];
 
-        [self addLetter1:140.0f positionx:60.0f];
+        [self addLetter1:240.0f positionx:60.0f];
     }
 }
 
@@ -274,17 +277,20 @@ static NSString *selectedLevel = @"test1";
         NSString *name = [NSString stringWithFormat: @"Levels/Level%d", levelNum];
         _level2 = (Level *) [CCBReader load:name owner:self];
         [_level2Node addChild:_level2];
-        
-        [self addLetter2:240.0f positionx:-600.0f];
+
+        [self random:240.0f position_y:60.0f];
+        [self random:100.0f position_y:230.0f];
     }
 }
 
+#pragma mark - Object adding
+
 - (void)addLetter1:(CGFloat)y positionx:(CGFloat)x{
-    int randomLetter = CCRANDOM_0_1() * 100;
+    int randomLetter = arc4random()%50;
     NSString *LetterName = [NSString stringWithFormat:@"Letter/Letter%@",[self randomletter] ];
     
     Letter *letter = (Letter *)[CCBReader load:LetterName];
-    CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter+100 + x, y)];
+    CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter + 100 + x, y)];
     
     letter.position = screenPosition;
     
@@ -292,142 +298,95 @@ static NSString *selectedLevel = @"test1";
     [_letters1 addObject:letter];
 }
 
-- (void)addLetter2:(CGFloat)y positionx:(CGFloat)x{
-    int randomLetter = CCRANDOM_0_1() * 100;
-    NSString *LetterName = [NSString stringWithFormat:@"Letter/Letter%@",[self randomletter] ];
-    
-    Letter *letter = (Letter *)[CCBReader load:LetterName];
-    CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter+100 + x, y)];
-    letter.position = screenPosition;
+//- (void)addLetter2:(CGFloat)y positionx:(CGFloat)x{
+//    int randomLetter = CCRANDOM_0_1() * 100;
+//    NSString *LetterName = [NSString stringWithFormat:@"Letter/Letter%@",[self randomletter] ];
+//    Letter *letter = (Letter *)[CCBReader load:LetterName];
+//    CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter+100 + x, y)];
+//    letter.position = screenPosition;
+//
+//    [_level2Node addChild:letter];
+//    [_letters2 addObject:letter];
+//}
 
+// used to generate letters in the GOAL to appear on the level1 scene
+-(void)random:(CGFloat)x position_y:(CGFloat)y{
+    int length = (int)solution.count;
+    int k = arc4random()% length;
+    int randomLetter = arc4random() % 50;
+    NSString *random_result = [solution objectAtIndex:k];
+    NSString *letterName = [NSString stringWithFormat:@"Letter/Letter%@", random_result];
+    Letter *letter = (Letter *)[CCBReader load:letterName];
+    CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter + x, y)];
+    letter.position = screenPosition;
+    
     [_level2Node addChild:letter];
     [_letters2 addObject:letter];
 }
 
+// used to generate random letter to appear on the level1 scene
 -(NSString *)randomletter{
-    int pickLetter = arc4random()%40;
-    switch (pickLetter) {
-        case 0:
-            return @"Z";
-            break;
-            
-        case 1:
-            return @"B";
-            break;
-        
-        case 2:
-            return @"C";
-            break;
-            
-        case 3:
-            return @"D";
-            break;
-            
-        case 4:
-            return @"Y";
-            break;
-            
-        case 5:
-            return @"F";
-            break;
-            
-        case 6:
-            return @"G";
-            break;
-            
-        case 7:
-            return @"H";
-            break;
-            
-        case 8:
-            return @"X";
-            break;
-            
-        case 9:
-            return @"J";
-            break;
-            
-        case 10:
-            return @"K";
-            break;
-            
-        case 11:
-            return @"L";
-            break;
-            
-        case 12:
-            return @"M";
-            break;
-            
-        case 13:
-            return @"N";
-            break;
-            
-        case 14:
-            return @"W";
-            break;
-            
-        case 15:
-            return @"P";
-            break;
-            
-        case 16:
-            return @"Q";
-            break;
-            
-        case 17:
-            return @"R";
-            break;
-            
-        case 18:
-            return @"S";
-            break;
-            
-        case 19:
-            return @"T";
-            break;
-            
-        case 20:
-            return @"V";
-            break;
-            // A E I O U
-        case 21:
-            case 22:
-            case 23:
-            case 24:
-            case 25:
-            return @"U";
-            break;
-            
-        case 26:
-            return @"O";
-            break;
-            
-        case 27:
-            case 28:
-            case 29:
-            return @"I";
-            break;
-            
-        case 30:
-            case 31:
-        case 32:
-            case 33:
-            case 34:
-            case 35:
-            return @"E";
-            break;
-            
-        case 36:
-            case 37:
-            case 38:
-            case 39:
-            case 40:
-            return @"A";
-            break;
-            
-        default:
-            break;
+    int pickLetter = (arc4random() % 1310) + 261;
+
+    if (pickLetter<=10 && (400 < pickLetter <=490)) {
+        return @"A";
+    }
+    if (10 < pickLetter && pickLetter <= 20){
+        return @"B";
+    }
+    if ((20 < pickLetter && pickLetter <= 30) || (490 < pickLetter && pickLetter <= 550)){
+        return @"C";
+    }
+    if ((30 < pickLetter && pickLetter <= 40) || (550 < pickLetter&& pickLetter <= 670)){
+        return @"D";
+    }
+    if ((40 < pickLetter && pickLetter<= 50) || (670 < pickLetter && pickLetter<= 790)){
+        return @"E";
+    }
+    if (50 < pickLetter && pickLetter<= 60){
+        return @"F";
+    }
+    if (60 < pickLetter && pickLetter<= 70){
+        return @"G";
+    }
+    if ((70 < pickLetter && pickLetter<= 80) || (790 < pickLetter && pickLetter<= 820)){
+        return @"H";
+    }else if ((80 < pickLetter && pickLetter<= 90) || (820 < pickLetter && pickLetter<= 880)){
+        return @"I";
+    }else if ((90 < pickLetter && pickLetter<= 100) || (880 < pickLetter && pickLetter<= 910)){
+        return @"J";
+    }else if ((100 < pickLetter && pickLetter<= 110) || (910 < pickLetter && pickLetter<= 940)){
+        return @"K";
+    }else if ((110 < pickLetter && pickLetter<= 120) || (940 < pickLetter && pickLetter<= 1000)){
+        return @"L";
+    }else if ((120 < pickLetter && pickLetter<= 130) || (1000 < pickLetter && pickLetter<= 1090)){
+        return @"M";
+    }else if ((130 < pickLetter && pickLetter <= 140) || (1090 < pickLetter && pickLetter <= 1180)){
+        return @"N";
+    }else if ((140 < pickLetter && pickLetter <= 150) || (1180 < pickLetter && pickLetter <= 1300)){
+        return @"O";
+    }else if (150 < pickLetter && pickLetter <= 160){
+        return @"P";
+    }else if (160 < pickLetter && pickLetter <= 170){
+        return @"Q";
+    }else if ((170 < pickLetter && pickLetter <= 180) || (1300 < pickLetter && pickLetter<= 1360)){
+        return @"R";
+    }else if ((180 < pickLetter && pickLetter <= 190) || (1360 < pickLetter && pickLetter<= 1420)){
+        return @"S";
+    }else if (190 < pickLetter && pickLetter <= 200){
+        return @"T";
+    }else if ((200 < pickLetter && pickLetter <= 210) || (1420 < pickLetter && pickLetter<= 1480)){
+        return @"U";
+    }else if (210 < pickLetter && pickLetter<= 220){
+        return @"V";
+    }else if ((220 < pickLetter && pickLetter<= 230) || (1480 < pickLetter && pickLetter<= 1510)){
+        return @"W";
+    }else if ((230 < pickLetter && pickLetter<= 240) || (260 < pickLetter && pickLetter<= 400)){
+        return @"X";
+    }else if ((240 < pickLetter && pickLetter<= 250) || (1510 < pickLetter && pickLetter <= 1570)){
+        return @"Y";
+    }else if (250 < pickLetter && pickLetter<= 260){
+        return @"Z";
     }
     return @"";
 }
@@ -441,13 +400,15 @@ static NSString *selectedLevel = @"test1";
         OALSimpleAudio *jumpaudio = [OALSimpleAudio sharedInstance];
         [jumpaudio playEffect:@"jump.wav"];
         _jumped = TRUE;
-        [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.7f];
+        [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.9f];
     }
 }
 
 - (void)resetJump{
     _jumped = FALSE;
 }
+
+#pragma mark - Button
 
 -(void)Restart{
     [self gameOver];
@@ -456,14 +417,26 @@ static NSString *selectedLevel = @"test1";
 - (void)Pause{
     if (!_stop) {
         self.paused = YES;
+        self.userInteractionEnabled = FALSE;
+//        [[OALSimpleAudio sharedInstance] stopBg];
         _stop = YES;
     }else{
         self.paused = NO;
+        self.userInteractionEnabled = TRUE;
         _stop = NO;
     }
 }
 
 #pragma mark - Game Over
+
+-(void)LosePopup{
+    Lose *popup = (Lose *)[CCBReader load:@"Lose" owner:self];
+    [self addChild:popup];
+    self.paused = YES;
+    self.userInteractionEnabled = FALSE;
+    pause.enabled = NO;
+    NSLog(@"word %@, solution %@", word, [solution lastObject]);
+}
 
 - (void)gameOver {
     CCScene *restartScene = [CCBReader loadAsScene:@"GamePlay"];
@@ -709,8 +682,21 @@ static NSString *selectedLevel = @"test1";
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man poo:(CCNode *)poo {
     [poo removeFromParent];
-    [self gameOver];
+    [self LosePopup];
     return NO;
 }
 
+
+-(void) shareToFacebook {
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    
+    // this should link to FB page for your app or AppStore link if published
+    content.contentURL = [NSURL URLWithString:@"https://www.facebook.com/makeschool"];
+    // URL of image to be displayed alongside post
+    content.imageURL = [NSURL URLWithString:@"https://git.makeschool.com/MakeSchool-Tutorials/News/f744d331484d043a373ee2a33d63626c352255d4//663032db-cf16-441b-9103-c518947c70e1/cover_photo.jpeg"];
+    // title of post
+    content.contentTitle = [NSString stringWithFormat:@"My Test!"];
+    // description/body of post
+    content.contentDescription = @"Test ";
+}
 @end

@@ -1,14 +1,14 @@
 //
-//  Lose.m
+//  Instruction.m
 //  SpellingMan
 //
-//  Created by steven on 4/14/15.
+//  Created by steven on 4/22/15.
 //  Copyright (c) 2015 Apportable. All rights reserved.
 //
 
-#import "Lose.h"
+#import "Instruction.h"
 
-@implementation Lose
+@implementation Instruction
 - (void)didLoadFromCCB{
     self.positionType = CCPositionTypeNormalized;
     self.position = ccp(0.5, 0.5);

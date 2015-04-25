@@ -3,6 +3,6 @@
 
 @interface MainScene : GamePlayScene
 
--(void) gameOver;
+
 
 @end

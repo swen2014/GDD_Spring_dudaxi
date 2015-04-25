@@ -64,11 +64,17 @@
 		927F61BA196C771E000F43EF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B737896D180762440076A88C /* Default.png */; };
 		927F61BB196C771E000F43EF /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B0233C691ADD9F9F00DDD30E /* Lose.m in Sources */ = {isa = PBXBuildFile; fileRef = B0233C681ADD9F9F00DDD30E /* Lose.m */; };
-		B08675F91AD89F5A00EBB06D /* GamePlayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B08675F81AD89F5A00EBB06D /* GamePlayScene.m */; };
+		B042E9761AE9A59000F0E551 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B042E9751AE9A59000F0E551 /* Bolts.framework */; };
+		B042E97B1AE9A59E00F0E551 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B042E9771AE9A59E00F0E551 /* FBSDKCoreKit.framework */; };
+		B042E97C1AE9A59E00F0E551 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B042E9781AE9A59E00F0E551 /* FBSDKLoginKit.framework */; };
+		B042E97D1AE9A59E00F0E551 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B042E9791AE9A59E00F0E551 /* FBSDKMessengerShareKit.framework */; };
+		B042E97E1AE9A59E00F0E551 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B042E97A1AE9A59E00F0E551 /* FBSDKShareKit.framework */; };
 		B08675FD1AD8A47500EBB06D /* Man.m in Sources */ = {isa = PBXBuildFile; fileRef = B08675FC1AD8A47500EBB06D /* Man.m */; };
 		B08676001AD8B0C900EBB06D /* GamePlay.m in Sources */ = {isa = PBXBuildFile; fileRef = B08675FF1AD8B0C900EBB06D /* GamePlay.m */; };
 		B086760F1AD8BF0400EBB06D /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = B086760E1AD8BF0400EBB06D /* Level.m */; };
 		B08676191AD990A100EBB06D /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = B08676181AD990A100EBB06D /* jump.wav */; };
+		B0CD2F991AE820E300E3CF4E /* Instruction.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CD2F981AE820E300E3CF4E /* Instruction.m */; };
+		B0CD2F9D1AE8308B00E3CF4E /* GamePlayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CD2F9C1AE8308B00E3CF4E /* GamePlayScene.m */; };
 		B0F8EE2F1ADB1BD300185BA8 /* Letter.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F8EE2E1ADB1BD300185BA8 /* Letter.m */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
@@ -175,8 +181,11 @@
 		927F61BF196C771E000F43EF /* SpellingMan Android.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SpellingMan Android.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0233C671ADD9F9F00DDD30E /* Lose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lose.h; path = Source/Lose.h; sourceTree = "<group>"; };
 		B0233C681ADD9F9F00DDD30E /* Lose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lose.m; path = Source/Lose.m; sourceTree = "<group>"; };
-		B08675F71AD89F5A00EBB06D /* GamePlayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamePlayScene.h; path = Source/GamePlayScene.h; sourceTree = "<group>"; };
-		B08675F81AD89F5A00EBB06D /* GamePlayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GamePlayScene.m; path = Source/GamePlayScene.m; sourceTree = "<group>"; };
+		B042E9751AE9A59000F0E551 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		B042E9771AE9A59E00F0E551 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		B042E9781AE9A59E00F0E551 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		B042E9791AE9A59E00F0E551 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
+		B042E97A1AE9A59E00F0E551 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		B08675FB1AD8A47500EBB06D /* Man.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Man.h; path = Source/Man.h; sourceTree = "<group>"; };
 		B08675FC1AD8A47500EBB06D /* Man.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Man.m; path = Source/Man.m; sourceTree = "<group>"; };
 		B08675FE1AD8B0C900EBB06D /* GamePlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamePlay.h; path = Source/GamePlay.h; sourceTree = "<group>"; };
@@ -184,6 +193,10 @@
 		B086760D1AD8BF0400EBB06D /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Level.h; path = Source/Level.h; sourceTree = "<group>"; };
 		B086760E1AD8BF0400EBB06D /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Level.m; path = Source/Level.m; sourceTree = "<group>"; };
 		B08676181AD990A100EBB06D /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = jump.wav; path = Audio/jump.wav; sourceTree = "<group>"; };
+		B0CD2F971AE820E300E3CF4E /* Instruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Instruction.h; path = Source/Instruction.h; sourceTree = "<group>"; };
+		B0CD2F981AE820E300E3CF4E /* Instruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Instruction.m; path = Source/Instruction.m; sourceTree = "<group>"; };
+		B0CD2F9B1AE8308B00E3CF4E /* GamePlayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamePlayScene.h; path = Source/GamePlayScene.h; sourceTree = "<group>"; };
+		B0CD2F9C1AE8308B00E3CF4E /* GamePlayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GamePlayScene.m; path = Source/GamePlayScene.m; sourceTree = "<group>"; };
 		B0F8EE2D1ADB1BD300185BA8 /* Letter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Letter.h; path = Source/Letter.h; sourceTree = "<group>"; };
 		B0F8EE2E1ADB1BD300185BA8 /* Letter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Letter.m; path = Source/Letter.m; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
@@ -272,10 +285,15 @@
 				7A97911819E631CD001FFC4D /* libcocos2d.a in Frameworks */,
 				8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
+				B042E9761AE9A59000F0E551 /* Bolts.framework in Frameworks */,
+				B042E97C1AE9A59E00F0E551 /* FBSDKLoginKit.framework in Frameworks */,
 				B77F1B3417B978D7009739AE /* OpenGLES.framework in Frameworks */,
 				B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */,
+				B042E97D1AE9A59E00F0E551 /* FBSDKMessengerShareKit.framework in Frameworks */,
+				B042E97E1AE9A59E00F0E551 /* FBSDKShareKit.framework in Frameworks */,
 				B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */,
 				B77F1B3A17B978D7009739AE /* AVFoundation.framework in Frameworks */,
+				B042E97B1AE9A59E00F0E551 /* FBSDKCoreKit.framework in Frameworks */,
 				B77F1B3C17B978D7009739AE /* UIKit.framework in Frameworks */,
 				B77F1B3E17B978D7009739AE /* Foundation.framework in Frameworks */,
 				B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */,
@@ -460,8 +478,10 @@
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
-				B08675F71AD89F5A00EBB06D /* GamePlayScene.h */,
-				B08675F81AD89F5A00EBB06D /* GamePlayScene.m */,
+				B0CD2F9B1AE8308B00E3CF4E /* GamePlayScene.h */,
+				B0CD2F9C1AE8308B00E3CF4E /* GamePlayScene.m */,
+				B0CD2F971AE820E300E3CF4E /* Instruction.h */,
+				B0CD2F981AE820E300E3CF4E /* Instruction.m */,
 				B08675FB1AD8A47500EBB06D /* Man.h */,
 				B08675FC1AD8A47500EBB06D /* Man.m */,
 				B08675FE1AD8B0C900EBB06D /* GamePlay.h */,
@@ -522,6 +542,11 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B042E9771AE9A59E00F0E551 /* FBSDKCoreKit.framework */,
+				B042E9781AE9A59E00F0E551 /* FBSDKLoginKit.framework */,
+				B042E9791AE9A59E00F0E551 /* FBSDKMessengerShareKit.framework */,
+				B042E97A1AE9A59E00F0E551 /* FBSDKShareKit.framework */,
+				B042E9751AE9A59000F0E551 /* Bolts.framework */,
 				BC5399D31A44DCC90063F482 /* AndroidKit.framework */,
 				BC5399D41A44DCC90063F482 /* CoreJava.framework */,
 				BC5399D51A44DCC90063F482 /* GLActivityKit.framework */,
@@ -843,10 +868,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B08675F91AD89F5A00EBB06D /* GamePlayScene.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				B08675FD1AD8A47500EBB06D /* Man.m in Sources */,
+				B0CD2F9D1AE8308B00E3CF4E /* GamePlayScene.m in Sources */,
 				B0233C691ADD9F9F00DDD30E /* Lose.m in Sources */,
+				B0CD2F991AE820E300E3CF4E /* Instruction.m in Sources */,
 				B08676001AD8B0C900EBB06D /* GamePlay.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				B086760F1AD8BF0400EBB06D /* Level.m in Sources */,
@@ -892,6 +918,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/steven/Documents/FacebookSDK,
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -941,6 +971,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/steven/Documents/FacebookSDK,
+				);
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -1132,11 +1166,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					/Users/steven/Documents/FacebookSDK,
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
@@ -1155,10 +1195,15 @@
 					"-lz",
 					"-ObjC",
 				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
+					"-lz",
+					"-ObjC",
+				);
 				PRODUCT_NAME = SpellingMan;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1167,11 +1212,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					/Users/steven/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1191,6 +1242,7 @@
 				PRODUCT_NAME = SpellingMan;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

@@ -12,8 +12,7 @@
 @implementation Man
 - (void)didLoadFromCCB
 {
-    self.position = ccp(100, 110);
-//    self.physicsBody.collisionType = @"man";
+    self.position = ccp(100, 70);
     self.physicsBody.velocity = CGPointZero;
 }
 

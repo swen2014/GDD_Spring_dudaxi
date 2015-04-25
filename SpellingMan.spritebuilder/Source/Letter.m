@@ -11,7 +11,7 @@
 @implementation Letter
 
 -(void)toString{
-    NSLog(@"ha letter");
+    NSLog(@"A letter");
 }
 
 @end
