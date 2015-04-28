@@ -61,7 +61,7 @@
 					<key>allowsRotation</key>
 					<true/>
 					<key>bodyShape</key>
-					<integer>1</integer>
+					<integer>0</integer>
 					<key>collisionCategories</key>
 					<array/>
 					<key>collisionMask</key>
@@ -69,7 +69,7 @@
 					<key>collisionType</key>
 					<string>a</string>
 					<key>cornerRadius</key>
-					<real>22</real>
+					<real>0.0</real>
 					<key>density</key>
 					<real>1</real>
 					<key>dynamic</key>
@@ -81,12 +81,61 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>15</real>
-							<real>16</real>
+							<real>1.9462134838104248</real>
+							<real>3.2390701770782471</real>
+						</array>
+						<array>
+							<real>5.1141581535339355</real>
+							<real>12.918619155883789</real>
+						</array>
+						<array>
+							<real>9.8151445388793945</real>
+							<real>32.52728271484375</real>
+						</array>
+						<array>
+							<real>17.712087631225586</real>
+							<real>31.36604118347168</real>
+						</array>
+						<array>
+							<real>19.324071884155273</real>
+							<real>9.1802396774291992</real>
 						</array>
 					</array>
 					<key>polygons</key>
-					<array/>
+					<array>
+						<array>
+							<array>
+								<real>5.1141581535339355</real>
+								<real>12.918619155883789</real>
+							</array>
+							<array>
+								<real>1.9462134838104248</real>
+								<real>3.2390701770782471</real>
+							</array>
+							<array>
+								<real>19.324071884155273</real>
+								<real>9.1802396774291992</real>
+							</array>
+						</array>
+						<array>
+							<array>
+								<real>19.324071884155273</real>
+								<real>9.1802396774291992</real>
+							</array>
+							<array>
+								<real>17.712087631225586</real>
+								<real>31.36604118347168</real>
+							</array>
+							<array>
+								<real>9.8151445388793945</real>
+								<real>32.52728271484375</real>
+							</array>
+							<array>
+								<real>5.1141581535339355</real>
+								<real>12.918619155883789</real>
+							</array>
+						</array>
+					</array>
 				</dict>
 				<key>properties</key>
 				<array>

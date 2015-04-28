@@ -81,40 +81,40 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>3.4987168312072754</real>
+							<real>2.5618879795074463</real>
 						</array>
 						<array>
-							<real>0.0</real>
-							<real>33</real>
+							<real>6.2403464317321777</real>
+							<real>26.400169372558594</real>
 						</array>
 						<array>
-							<real>27</real>
-							<real>33</real>
+							<real>23.483554840087891</real>
+							<real>27.666120529174805</real>
 						</array>
 						<array>
-							<real>27</real>
-							<real>0.0</real>
+							<real>20.706550598144531</real>
+							<real>6.9459691047668457</real>
 						</array>
 					</array>
 					<key>polygons</key>
 					<array>
 						<array>
 							<array>
-								<real>27</real>
-								<real>0.0</real>
+								<real>20.706550598144531</real>
+								<real>6.9459691047668457</real>
 							</array>
 							<array>
-								<real>27</real>
-								<real>33</real>
+								<real>23.483554840087891</real>
+								<real>27.666120529174805</real>
 							</array>
 							<array>
-								<real>0.0</real>
-								<real>33</real>
+								<real>6.2403464317321777</real>
+								<real>26.400169372558594</real>
 							</array>
 							<array>
-								<real>0.0</real>
-								<real>0.0</real>
+								<real>3.4987168312072754</real>
+								<real>2.5618879795074463</real>
 							</array>
 						</array>
 					</array>

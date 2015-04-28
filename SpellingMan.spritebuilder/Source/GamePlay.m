@@ -19,6 +19,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 //
 static const CGFloat scrollSpeed = 160.f;
+static NSString *const highscore = @"highest";
 
 @implementation GamePlay{
     Man *_man;
@@ -40,6 +41,7 @@ static const CGFloat scrollSpeed = 160.f;
     BOOL _gameOver;
     BOOL _begin;
     BOOL _stop;// Flag to determined if the game pause or not
+    BOOL _check;
     
     CCNode *_ground1;
     CCNode *_ground2;
@@ -67,6 +69,7 @@ static const CGFloat scrollSpeed = 160.f;
 {
     self.userInteractionEnabled = TRUE;
     _physicsNode.collisionDelegate = self;
+//    _physicsNode.collisionDelegate = nil;
     
     _level1 = (Level *) [CCBReader load:@"Levels/Level4" owner:self];
     _level2 = (Level *) [CCBReader load:@"Levels/Level2" owner:self];
@@ -141,6 +144,8 @@ static const CGFloat scrollSpeed = 160.f;
 }
 
 - (void)check{
+//    if (_check){
+//        _check = FALSE;
     NSUInteger len = [word length];
     NSUInteger len1 = [goal length];
     if (len > len1) {
@@ -160,13 +165,20 @@ static const CGFloat scrollSpeed = 160.f;
         [word setString:@""];
         _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
         [solution removeAllObjects];
-        NSLog(@"word:%@", word);
-        NSLog(@"solution %@", [solution lastObject]);
+//        NSLog(@"word:%@", word);
+//        NSLog(@"solution %@", [solution lastObject]);
         [self generateWord:data];
     }else{
         _gameOver = YES;
     }
     }
+//        [self performSelector:@selector(resetcheck) withObject:nil afterDelay:0.9f];
+//        NSLog(@"reset");
+//    }
+}
+
+-(void)resetcheck{
+    _check = TRUE;
 }
 
 #pragma mark - update
@@ -243,6 +255,8 @@ static const CGFloat scrollSpeed = 160.f;
             
         }
     }else{
+        _gameOver = NO;
+//        NSLog(@"collision");
         self.paused = YES;
         [self LosePopup];
     }
@@ -278,8 +292,8 @@ static const CGFloat scrollSpeed = 160.f;
         _level2 = (Level *) [CCBReader load:name owner:self];
         [_level2Node addChild:_level2];
 
-        [self random:240.0f position_y:60.0f];
-        [self random:100.0f position_y:230.0f];
+        [self random:240.0f position_y:50.0f];
+        [self random:80.0f position_y:230.0f];
     }
 }
 
@@ -288,6 +302,7 @@ static const CGFloat scrollSpeed = 160.f;
 - (void)addLetter1:(CGFloat)y positionx:(CGFloat)x{
     int randomLetter = arc4random()%50;
     NSString *LetterName = [NSString stringWithFormat:@"Letter/Letter%@",[self randomletter] ];
+//    NSString *LetterName = [NSString stringWithFormat:@"Letter/Letter%@", @"A"];
     
     Letter *letter = (Letter *)[CCBReader load:LetterName];
     CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter + 100 + x, y)];
@@ -326,7 +341,7 @@ static const CGFloat scrollSpeed = 160.f;
 
 // used to generate random letter to appear on the level1 scene
 -(NSString *)randomletter{
-    int pickLetter = (arc4random() % 1310) + 261;
+    int pickLetter = (arc4random() % 1310)+ 261; //+ 261;//%1310
 
     if (pickLetter<=10 && (400 < pickLetter <=490)) {
         return @"A";
@@ -436,6 +451,16 @@ static const CGFloat scrollSpeed = 160.f;
     self.userInteractionEnabled = FALSE;
     pause.enabled = NO;
     NSLog(@"word %@, solution %@", word, [solution lastObject]);
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:highscore]==nil){
+        [[NSUserDefaults standardUserDefaults] setInteger:score forKey:highscore];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+//        level = 1;
+    }else{
+        [[NSUserDefaults standardUserDefaults] setInteger:5 forKey:highscore];
+        int test = (int)[[NSUserDefaults standardUserDefaults] integerForKey:highscore];
+        NSLog(@"%d", test);
+    }
 }
 
 - (void)gameOver {
@@ -445,163 +470,191 @@ static const CGFloat scrollSpeed = 160.f;
 }
 
 #pragma mark - Collision Handle
+- (void)ccPhysicsCollisionSeparate:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a {
 
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a {
+//- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a {
+//    [pair ignore];
     [a removeFromParent];
     NSString *letter = @"A";
+    NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
+    [_scoreLabel runAction:[CCActionDelay actionWithDuration: 1.1f]];
     [self check];
-    return NO;
+//    return NO;
+//    return YES;
+//    return [pair ignore];
+}
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a{
+    NSLog(@"AKa");
 }
 
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man b:(CCNode *)b {
+    
     [b removeFromParent];
     NSString *letter = @"B";
+    NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
     return NO;
+//    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man c:(CCNode *)c {
     [c removeFromParent];
-    NSString *letter = @"C";
+    NSString *letter = @"C";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man d:(CCNode *)d {
     [d removeFromParent];
-    NSString *letter = @"D";
+    NSString *letter = @"D";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man e:(CCNode *)e {
     [e removeFromParent];
-    NSString *letter = @"E";
+    NSString *letter = @"E";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man f:(CCNode *)f {
     [f removeFromParent];
-    NSString *letter = @"F";
+    NSString *letter = @"F";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man g:(CCNode *)g {
     [g removeFromParent];
-    NSString *letter = @"G";
+    NSString *letter = @"G";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man h:(CCNode *)h {
     [h removeFromParent];
-    NSString *letter = @"H";
+    NSString *letter = @"H";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man i:(CCNode *)i {
     [i removeFromParent];
-    NSString *letter = @"I";
+    NSString *letter = @"I";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man j:(CCNode *)j {
     [j removeFromParent];
-    NSString *letter = @"J";
+    NSString *letter = @"J";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man k:(CCNode *)k {
     [k removeFromParent];
-    NSString *letter = @"K";
+    NSString *letter = @"K";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man l:(CCNode *)l {
     [l removeFromParent];
-    NSString *letter = @"L";
+    NSString *letter = @"L";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man m:(CCNode *)m {
     [m removeFromParent];
-    NSString *letter = @"M";
+    NSString *letter = @"M";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man n:(CCNode *)n {
     [n removeFromParent];
-    NSString *letter = @"N";
+    NSString *letter = @"N";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man o:(CCNode *)o {
     [o removeFromParent];
-    NSString *letter = @"O";
+    NSString *letter = @"O";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man p:(CCNode *)p {
     [p removeFromParent];
-    NSString *letter = @"P";
+    NSString *letter = @"P";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man q:(CCNode *)q {
     [q removeFromParent];
-    NSString *letter = @"Q";
+    NSString *letter = @"Q";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+//    return NO;
+    return [pair ignore];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man r:(CCNode *)r {
     [r removeFromParent];
-    NSString *letter = @"R";
+    NSString *letter = @"R";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
@@ -610,7 +663,7 @@ static const CGFloat scrollSpeed = 160.f;
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man s:(CCNode *)s {
     [s removeFromParent];
-    NSString *letter = @"S";
+    NSString *letter = @"S";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
@@ -619,7 +672,7 @@ static const CGFloat scrollSpeed = 160.f;
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man t:(CCNode *)t {
     [t removeFromParent];
-    NSString *letter = @"T";
+    NSString *letter = @"T";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
@@ -628,7 +681,7 @@ static const CGFloat scrollSpeed = 160.f;
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man u:(CCNode *)u {
     [u removeFromParent];
-    NSString *letter = @"U";
+    NSString *letter = @"U";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
@@ -637,7 +690,7 @@ static const CGFloat scrollSpeed = 160.f;
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man v:(CCNode *)v {
     [v removeFromParent];
-    NSString *letter = @"V";
+    NSString *letter = @"V";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
@@ -646,7 +699,7 @@ static const CGFloat scrollSpeed = 160.f;
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man w:(CCNode *)w {
     [w removeFromParent];
-    NSString *letter = @"W";
+    NSString *letter = @"W";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
@@ -655,7 +708,7 @@ static const CGFloat scrollSpeed = 160.f;
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man x:(CCNode *)x {
     [x removeFromParent];
-    NSString *letter = @"X";
+    NSString *letter = @"X";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
@@ -664,7 +717,7 @@ static const CGFloat scrollSpeed = 160.f;
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man y:(CCNode *)y {
     [y removeFromParent];
-    NSString *letter = @"Y";
+    NSString *letter = @"Y";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
@@ -673,7 +726,7 @@ static const CGFloat scrollSpeed = 160.f;
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man z:(CCNode *)z {
     [z removeFromParent];
-    NSString *letter = @"Z";
+    NSString *letter = @"Z";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
@@ -683,6 +736,7 @@ static const CGFloat scrollSpeed = 160.f;
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man poo:(CCNode *)poo {
     [poo removeFromParent];
     [self LosePopup];
+//    _physicsNode.collisionDelegate = nil;
     return NO;
 }
 
