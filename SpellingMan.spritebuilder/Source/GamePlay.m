@@ -185,8 +185,8 @@ static NSString *const highscore = @"highest";
 
 -(void)update:(CCTime)delta
 {
-    // Move the LevelNode to shift left
     _man.position = ccp(100, _man.position.y);
+    // Move the LevelNode to shift left
     _levelNode.position = ccp(_levelNode.position.x - (scrollSpeed * delta), _levelNode.position.y);
 
     // loop the ground
@@ -455,12 +455,13 @@ static NSString *const highscore = @"highest";
     if([[NSUserDefaults standardUserDefaults] objectForKey:highscore]==nil){
         [[NSUserDefaults standardUserDefaults] setInteger:score forKey:highscore];
         [[NSUserDefaults standardUserDefaults] synchronize];
-//        level = 1;
-    }else{
-        [[NSUserDefaults standardUserDefaults] setInteger:5 forKey:highscore];
-        int test = (int)[[NSUserDefaults standardUserDefaults] integerForKey:highscore];
-        NSLog(@"%d", test);
     }
+//        level = 1;
+//    }else{
+//        [[NSUserDefaults standardUserDefaults] setInteger:5 forKey:highscore];
+//        int test = (int)[[NSUserDefaults standardUserDefaults] integerForKey:highscore];
+//        NSLog(@"%d", test);
+//    }
 }
 
 - (void)gameOver {
@@ -485,9 +486,10 @@ static NSString *const highscore = @"highest";
 //    return YES;
 //    return [pair ignore];
 }
-- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a{
-    NSLog(@"AKa");
-}
+
+//- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a{
+//    NSLog(@"AKa");
+//}
 
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man b:(CCNode *)b {
