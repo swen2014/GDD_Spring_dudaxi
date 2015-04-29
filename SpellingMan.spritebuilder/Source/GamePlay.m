@@ -41,7 +41,7 @@ static NSString *const highscore = @"highest";
     BOOL _gameOver;
     BOOL _begin;
     BOOL _stop;// Flag to determined if the game pause or not
-    BOOL _check;
+    BOOL _donotcalltwice;
     
     CCNode *_ground1;
     CCNode *_ground2;
@@ -69,7 +69,7 @@ static NSString *const highscore = @"highest";
 {
     self.userInteractionEnabled = TRUE;
     _physicsNode.collisionDelegate = self;
-//    _physicsNode.collisionDelegate = nil;
+    _donotcalltwice = NO;
     
     _level1 = (Level *) [CCBReader load:@"Levels/Level4" owner:self];
     _level2 = (Level *) [CCBReader load:@"Levels/Level2" owner:self];
@@ -93,7 +93,7 @@ static NSString *const highscore = @"highest";
     data = [[NSArray alloc] initWithObjects:@"cmu", @"dudaxi",@"wendy", @"jeremy", @"curry",
             @"dion", @"larson",@"sv",nil];
     solution = [NSMutableArray array];
-//    [[OALSimpleAudio sharedInstance] playBg:@"Mantis.mp3" loop:YES];
+//    [[OALSimpleAudio sharedInstance] playBg:@".mp3" loop:YES];
     
     _letters1 = [NSMutableArray array];
     _letters2 = [NSMutableArray array];
@@ -118,7 +118,6 @@ static NSString *const highscore = @"highest";
     pause.enabled = YES;
     self.userInteractionEnabled = TRUE;
     self.paused = NO;
-//    [_physicsNode addChild:_man];
 }
 
 
@@ -144,8 +143,6 @@ static NSString *const highscore = @"highest";
 }
 
 - (void)check{
-//    if (_check){
-//        _check = FALSE;
     NSUInteger len = [word length];
     NSUInteger len1 = [goal length];
     if (len > len1) {
@@ -172,14 +169,11 @@ static NSString *const highscore = @"highest";
         _gameOver = YES;
     }
     }
-//        [self performSelector:@selector(resetcheck) withObject:nil afterDelay:0.9f];
-//        NSLog(@"reset");
-//    }
 }
 
--(void)resetcheck{
-    _check = TRUE;
-}
+//-(void)resetcheck{
+//    _donotcalltwice = TRUE;
+//}
 
 #pragma mark - update
 
@@ -255,7 +249,7 @@ static NSString *const highscore = @"highest";
             
         }
     }else{
-        _gameOver = NO;
+//        _gameOver = NO;
 //        NSLog(@"collision");
         self.paused = YES;
         [self LosePopup];
@@ -275,7 +269,7 @@ static NSString *const highscore = @"highest";
         _level1 = (Level *) [CCBReader load:name owner:self];
         [_level1Node addChild:_level1];
 
-        [self addLetter1:240.0f positionx:60.0f];
+        [self addLetter1:250.0f positionx:60.0f];
     }
 }
 
@@ -292,7 +286,7 @@ static NSString *const highscore = @"highest";
         _level2 = (Level *) [CCBReader load:name owner:self];
         [_level2Node addChild:_level2];
 
-        [self random:240.0f position_y:50.0f];
+        [self random:240.0f position_y:60.0f];
         [self random:80.0f position_y:230.0f];
     }
 }
@@ -302,7 +296,6 @@ static NSString *const highscore = @"highest";
 - (void)addLetter1:(CGFloat)y positionx:(CGFloat)x{
     int randomLetter = arc4random()%50;
     NSString *LetterName = [NSString stringWithFormat:@"Letter/Letter%@",[self randomletter] ];
-//    NSString *LetterName = [NSString stringWithFormat:@"Letter/Letter%@", @"A"];
     
     Letter *letter = (Letter *)[CCBReader load:LetterName];
     CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter + 100 + x, y)];
@@ -471,268 +464,450 @@ static NSString *const highscore = @"highest";
 }
 
 #pragma mark - Collision Handle
-- (void)ccPhysicsCollisionSeparate:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a {
 
-//- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a {
-//    [pair ignore];
-    [a removeFromParent];
-    NSString *letter = @"A";
-    NSLog(@"%@", letter);
-    [word appendString:letter];
-    _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
-    [_scoreLabel runAction:[CCActionDelay actionWithDuration: 1.1f]];
-    [self check];
-//    return NO;
-//    return YES;
-//    return [pair ignore];
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a {
+    if (!_donotcalltwice) {
+        _donotcalltwice = YES;
+        [a removeFromParent];
+        NSString *letter = @"A";
+        NSLog(@"%@", letter);
+        [word appendString:letter];
+        _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
+        [_scoreLabel runAction:[CCActionDelay actionWithDuration: 1.1f]];
+        [self check];
+        return YES;
+    }
+    return [pair ignore];
 }
 
-//- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a{
-//    NSLog(@"AKa");
-//}
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man a:(CCNode *)a{
+    _donotcalltwice = NO;
+}
 
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man b:(CCNode *)b {
-    
+    if (!_donotcalltwice) {
+        _donotcalltwice = YES;
     [b removeFromParent];
     NSString *letter = @"B";
-    NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
-//    return [pair ignore];
+    return YES;
+    }
+    return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man b:(CCNode *)b{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man c:(CCNode *)c {
+if (!_donotcalltwice) {
+    _donotcalltwice = YES;
     [c removeFromParent];
-    NSString *letter = @"C";NSLog(@"%@", letter);
+    NSString *letter = @"C";
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+}
     return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man c:(CCNode *)c{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man d:(CCNode *)d {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [d removeFromParent];
-    NSString *letter = @"D";NSLog(@"%@", letter);
+    NSString *letter = @"D";
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man d:(CCNode *)d{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man e:(CCNode *)e {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [e removeFromParent];
-    NSString *letter = @"E";NSLog(@"%@", letter);
+    NSString *letter = @"E";
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man e:(CCNode *)e{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man f:(CCNode *)f {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [f removeFromParent];
     NSString *letter = @"F";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man f:(CCNode *)f{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man g:(CCNode *)g {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [g removeFromParent];
     NSString *letter = @"G";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man g:(CCNode *)g{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man h:(CCNode *)h {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [h removeFromParent];
     NSString *letter = @"H";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man h:(CCNode *)h{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man i:(CCNode *)i {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [i removeFromParent];
     NSString *letter = @"I";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man i:(CCNode *)i{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man j:(CCNode *)j {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [j removeFromParent];
     NSString *letter = @"J";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man j:(CCNode *)j{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man k:(CCNode *)k {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [k removeFromParent];
     NSString *letter = @"K";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man k:(CCNode *)k{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man l:(CCNode *)l {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [l removeFromParent];
     NSString *letter = @"L";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man l:(CCNode *)l{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man m:(CCNode *)m {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [m removeFromParent];
     NSString *letter = @"M";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man m:(CCNode *)m{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man n:(CCNode *)n {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [n removeFromParent];
     NSString *letter = @"N";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man n:(CCNode *)n{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man o:(CCNode *)o {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [o removeFromParent];
     NSString *letter = @"O";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man o:(CCNode *)o{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man p:(CCNode *)p {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [p removeFromParent];
     NSString *letter = @"P";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man p:(CCNode *)p{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man q:(CCNode *)q {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [q removeFromParent];
     NSString *letter = @"Q";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-//    return NO;
+    return YES;
+        }
     return [pair ignore];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man q:(CCNode *)q{
+    _donotcalltwice = NO;
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man r:(CCNode *)r {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [r removeFromParent];
     NSString *letter = @"R";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+    return YES;
+        }
+    return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man r:(CCNode *)r{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man s:(CCNode *)s {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [s removeFromParent];
     NSString *letter = @"S";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+    return YES;
+        }
+    return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man s:(CCNode *)s{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man t:(CCNode *)t {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [t removeFromParent];
     NSString *letter = @"T";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+    return YES;
+        }
+    return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man t:(CCNode *)t{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man u:(CCNode *)u {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [u removeFromParent];
     NSString *letter = @"U";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+    return YES;
+        }
+    return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man u:(CCNode *)u{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man v:(CCNode *)v {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [v removeFromParent];
     NSString *letter = @"V";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+    return YES;
+        }
+    return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man v:(CCNode *)v{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man w:(CCNode *)w {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [w removeFromParent];
     NSString *letter = @"W";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+    return YES;
+        }
+    return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man w:(CCNode *)w{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man x:(CCNode *)x {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [x removeFromParent];
     NSString *letter = @"X";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+    return YES;
+        }
+    return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man x:(CCNode *)x{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man y:(CCNode *)y {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [y removeFromParent];
     NSString *letter = @"Y";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+    return YES;
+        }
+    return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man y:(CCNode *)y{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man z:(CCNode *)z {
+        if (!_donotcalltwice) {
+            _donotcalltwice = YES;
     [z removeFromParent];
     NSString *letter = @"Z";NSLog(@"%@", letter);
     [word appendString:letter];
     _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
     [self check];
-    return NO;
+    return YES;
+        }
+    return [pair ignore];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man z:(CCNode *)z{
+    _donotcalltwice = NO;
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Man:(CCNode *)Man poo:(CCNode *)poo {
