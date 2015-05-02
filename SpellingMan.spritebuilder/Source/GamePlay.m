@@ -18,10 +18,11 @@
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 //
-static const CGFloat scrollSpeed = 160.f;
+//static const CGFloat scrollSpeed = 160.f;
 static NSString *const highscore = @"highest";
 
 @implementation GamePlay{
+    CGFloat scrollSpeed;
     Man *_man;
 
     CCPhysicsNode *_physicsNode;
@@ -36,6 +37,7 @@ static NSString *const highscore = @"highest";
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_goalLabel;
     CCLabelTTF *_countLabel;
+    CCLabelTTF *_highscoreLabel;
     
     BOOL _jumped;
     BOOL _gameOver;
@@ -53,9 +55,11 @@ static NSString *const highscore = @"highest";
     NSArray *data;
     NSMutableString *word;
     NSString *goal;
-    NSMutableArray *solution;
-    char solution1[10];
+    NSMutableArray *solution;//cache the current goal as Array
+    NSString *lastgoal;
+    NSMutableString *next;
     int score;
+    int nextIndx;
     
     NSMutableArray *offScreen;
     
@@ -63,6 +67,9 @@ static NSString *const highscore = @"highest";
     CCButton *ok;
     
     Instruction *guide;
+    
+    UIView *view;
+    UIImage *shareImg;
 }
 
 - (void)didLoadFromCCB
@@ -70,6 +77,10 @@ static NSString *const highscore = @"highest";
     self.userInteractionEnabled = TRUE;
     _physicsNode.collisionDelegate = self;
     _donotcalltwice = NO;
+    
+    [self highScore];
+    
+    [[OALSimpleAudio sharedInstance] preloadBg:@"background.mp3"];
     
     _level1 = (Level *) [CCBReader load:@"Levels/Level4" owner:self];
     _level2 = (Level *) [CCBReader load:@"Levels/Level2" owner:self];
@@ -89,19 +100,30 @@ static NSString *const highscore = @"highest";
 
 - (void)initilization{
     word = [[NSMutableString alloc] initWithCapacity:10];
-        
+    lastgoal = @"";
+    // source
     data = [[NSArray alloc] initWithObjects:@"cmu", @"dudaxi",@"wendy", @"jeremy", @"curry",
-            @"dion", @"larson",@"sv",nil];
+            @"dion", @"larson",@"tony",@"jordan",@"thor",@"ultron", @"captain",nil];
     solution = [NSMutableArray array];
-//    [[OALSimpleAudio sharedInstance] playBg:@".mp3" loop:YES];
     
     _letters1 = [NSMutableArray array];
     _letters2 = [NSMutableArray array];
     _grounds = @[_ground1, _ground2];
+    int startspeed = 160;
+    scrollSpeed = (CGFloat) startspeed;
+}
+
+-(void)highScore{
+    if([[NSUserDefaults standardUserDefaults] objectForKey:highscore] == nil){
+            _highscoreLabel.string = [NSString stringWithFormat:@"High:0"];
+    }else{
+        int high = (int)[[NSUserDefaults standardUserDefaults] integerForKey:highscore];
+        _highscoreLabel.string = [NSString stringWithFormat:@"High:%d", high];
+    }
 }
 
 #pragma mark - Guide Scene
-
+//instruction view pop up
 - (void)instruction{
     guide = (Instruction *) [CCBReader load:@"Guide" owner:self];
     [self addChild:guide];
@@ -118,6 +140,7 @@ static NSString *const highscore = @"highest";
     pause.enabled = YES;
     self.userInteractionEnabled = TRUE;
     self.paused = NO;
+    [[OALSimpleAudio sharedInstance] playBg:@"background.mp3" loop:YES];
 }
 
 
@@ -126,14 +149,23 @@ static NSString *const highscore = @"highest";
 - (void)generateWord:(NSArray *)resource{
     int num = (arc4random() % resource.count);
     goal = [resource objectAtIndex:num];
+    while ([goal isEqualToString:lastgoal]) {
+        int num = (arc4random() % resource.count);
+        goal = [resource objectAtIndex:num];
+    }
     NSString *cap = [goal uppercaseString];
     for (int i=0; i < cap.length; i++) {
         char c = [cap characterAtIndex:i];
         [solution addObject:[NSString stringWithFormat:@"%c",c]];
+        if (i == 0) {
+            next = [NSMutableString stringWithString:[NSString stringWithFormat:@"%c",c]];
+        }
     }
+    nextIndx = 0;
     _goalLabel.string = [NSString stringWithFormat:@"Goal:%@", cap];
 }
 
+//remove the adding letter but not colliside with the man
 - (void)removeExist
 {
     NSString *temp = [NSString stringWithFormat:@"%@", word ];
@@ -142,38 +174,39 @@ static NSString *const highscore = @"highest";
     }
 }
 
+//check if the answer is correct
 - (void)check{
     NSUInteger len = [word length];
     NSUInteger len1 = [goal length];
-    if (len > len1) {
-        _gameOver = YES;
-    }
+
     if(len < len1){
         if ([ [goal uppercaseString] hasPrefix:word]) {
+            nextIndx++;
         }else{
             _gameOver = YES;
         }
-    }
-    if (len == len1)
-{    BOOL _gameWin = [[goal uppercaseString] isEqualToString:word];
-    if (_gameWin) {
-        score++;
-        _countLabel.string = [NSString stringWithFormat:@"%d", score];
-        [word setString:@""];
-        _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
-        [solution removeAllObjects];
-//        NSLog(@"word:%@", word);
-//        NSLog(@"solution %@", [solution lastObject]);
-        [self generateWord:data];
+    }else if (len == len1){
+        BOOL _gameWin = [[goal uppercaseString] isEqualToString:word];
+        if (_gameWin) {
+            score++;
+            OALSimpleAudio *win = [OALSimpleAudio sharedInstance];
+            [win playEffect:@"win.wav"];
+            _countLabel.string = [NSString stringWithFormat:@"%d", score];
+            [word setString:@""];
+            _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
+            [solution removeAllObjects];
+            [self generateWord:data];
+            scrollSpeed = scrollSpeed + (CGFloat) score * 10;
+        }else{
+        _gameOver = YES;
+        }
     }else{
         _gameOver = YES;
     }
-    }
 }
 
-//-(void)resetcheck{
-//    _donotcalltwice = TRUE;
-//}
+
+
 
 #pragma mark - update
 
@@ -242,7 +275,7 @@ static NSString *const highscore = @"highest";
         @try
         {
             _man.physicsBody.velocity = ccp(0, clampf(_man.physicsBody.velocity.y, -MAXFLOAT, 290.f));
-            [self removeExist];
+//            [self removeExist];
         }
     @catch(NSException* ex)
         {
@@ -250,11 +283,58 @@ static NSString *const highscore = @"highest";
         }
     }else{
 //        _gameOver = NO;
-//        NSLog(@"collision");
         self.paused = YES;
+        
+        CCScene *scene = [[CCDirector sharedDirector] runningScene];
+        CCNode *node = [scene.children objectAtIndex:0];
+        shareImg = [self screenShot:node];
+        view = [CCDirector sharedDirector].view;
+        
         [self LosePopup];
     }
 }
+
+-(void)Share{
+    [self facebookShare];
+}
+
+-(void)facebookShare{
+    FBSDKSharePhoto *screen = [[FBSDKSharePhoto alloc] init];
+    screen.image = shareImg;
+    screen.userGenerated = YES;
+    //    [screen setImageURL:[NSURL URLWithString:@"http://spellingman.dudaxih.com"]];
+    
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[screen];
+    
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = shareImg;
+    photo.userGenerated = YES;
+//    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+//    content.photos = @[photo];
+    
+    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+    dialog.fromViewController = [CCDirector sharedDirector];
+    [dialog setShareContent:content];
+    dialog.mode = FBSDKShareDialogModeShareSheet;
+    [dialog show];
+}
+
+-(UIImage*) screenShot:(CCNode*)startNode
+{
+    [CCDirector sharedDirector].nextDeltaTimeZero = YES;
+    
+    CGSize winSize = [[CCDirector sharedDirector]viewSize];
+    CCRenderTexture* rtx = [CCRenderTexture renderTextureWithWidth:winSize.width
+                                     height:winSize.height];
+    [rtx begin];
+    [startNode visit];
+    [rtx end];
+    
+    return [rtx getUIImage];
+}
+
+#pragma mark - Level Layout Loop
 
 -(void)BGReplace1{
     // loop the level node to create infinite scene
@@ -269,7 +349,17 @@ static NSString *const highscore = @"highest";
         _level1 = (Level *) [CCBReader load:name owner:self];
         [_level1Node addChild:_level1];
 
-        [self addLetter1:250.0f positionx:60.0f];
+        int pattern = arc4random()%3;
+        if (pattern == 0) {
+            [self addLetter1:400.0f position_y:257.0f];
+            [self addLetter4:382.0f position_y:124.0f];
+        }else if (pattern ==1){
+            [self addLetter1:400.0f position_y:257.0f];
+            [self addLetter4:170.0f position_y:225.0f];
+        }else{
+            [self addLetter1:170.0f position_y:225.0f];
+            [self addLetter4:382.0f position_y:124.0f];
+        }
     }
 }
 
@@ -281,24 +371,36 @@ static NSString *const highscore = @"highest";
     if (levelScreenPosition.x <= (-1 * _level2.contentSize.width)) {
         _level2Node.position = ccp(_level2Node.position.x + 2 * _level2.contentSize.width, _level2Node.position.y);
         [_level2Node removeChild:_level2];
-        int levelNum = (arc4random() % 3) + 1;
+        int levelNum = (arc4random() % 2) + 3;
         NSString *name = [NSString stringWithFormat: @"Levels/Level%d", levelNum];
         _level2 = (Level *) [CCBReader load:name owner:self];
         [_level2Node addChild:_level2];
 
-        [self random:240.0f position_y:60.0f];
-        [self random:80.0f position_y:230.0f];
+        // random pattern
+        int pattern = arc4random()%3;
+        if (pattern == 0) {
+            [self addLetter2:415.0f position_y:163.0f];
+            [self addLetter3:382.0f position_y:251.0f];
+        }else if (pattern ==1){
+            [self addLetter3:382.0f position_y:251.0f];
+            [self addLetter3:110.0f position_y:270.0f];
+            [self addLetter2:101.0f position_y:55.0f];
+        }else{
+            [self addLetter2:415.0f position_y:163.0f];
+            [self addLetter3:110.0f position_y:270.0f];
+        }
     }
 }
 
 #pragma mark - Object adding
 
-- (void)addLetter1:(CGFloat)y positionx:(CGFloat)x{
-    int randomLetter = arc4random()%50;
+//adding random letter
+- (void)addLetter1:(CGFloat)x position_y:(CGFloat)y{
+    int randomLetter = arc4random()%10;
     NSString *LetterName = [NSString stringWithFormat:@"Letter/Letter%@",[self randomletter] ];
-    
+
     Letter *letter = (Letter *)[CCBReader load:LetterName];
-    CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter + 100 + x, y)];
+    CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter + x, y)];
     
     letter.position = screenPosition;
     
@@ -306,19 +408,18 @@ static NSString *const highscore = @"highest";
     [_letters1 addObject:letter];
 }
 
-//- (void)addLetter2:(CGFloat)y positionx:(CGFloat)x{
-//    int randomLetter = CCRANDOM_0_1() * 100;
-//    NSString *LetterName = [NSString stringWithFormat:@"Letter/Letter%@",[self randomletter] ];
-//    Letter *letter = (Letter *)[CCBReader load:LetterName];
-//    CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter+100 + x, y)];
-//    letter.position = screenPosition;
-//
-//    [_level2Node addChild:letter];
-//    [_letters2 addObject:letter];
-//}
+- (void)addLetter2:(CGFloat)x position_y:(CGFloat)y{
+    NSString *LetterName = [NSString stringWithFormat:@"Letter/Letter%@",[solution objectAtIndex:nextIndx] ];
+    Letter *letter = (Letter *)[CCBReader load:LetterName];
+    CGPoint screenPosition = [self convertToNodeSpace:ccp(x, y)];
+    letter.position = screenPosition;
+
+    [_level2Node addChild:letter];
+    [_letters2 addObject:letter];
+}
 
 // used to generate letters in the GOAL to appear on the level1 scene
--(void)random:(CGFloat)x position_y:(CGFloat)y{
+-(void)addLetter3:(CGFloat)x position_y:(CGFloat)y{
     int length = (int)solution.count;
     int k = arc4random()% length;
     int randomLetter = arc4random() % 50;
@@ -330,6 +431,20 @@ static NSString *const highscore = @"highest";
     
     [_level2Node addChild:letter];
     [_letters2 addObject:letter];
+}
+
+-(void)addLetter4:(CGFloat)x position_y:(CGFloat)y{
+    int length = (int)solution.count;
+    int k = arc4random()% length;
+    int randomLetter = arc4random() % 10;
+    NSString *random_result = [solution objectAtIndex:k];
+    NSString *letterName = [NSString stringWithFormat:@"Letter/Letter%@", random_result];
+    Letter *letter = (Letter *)[CCBReader load:letterName];
+    CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter + x, y)];
+    letter.position = screenPosition;
+    
+    [_level1Node addChild:letter];
+    [_letters1 addObject:letter];
 }
 
 // used to generate random letter to appear on the level1 scene
@@ -409,6 +524,7 @@ static NSString *const highscore = @"highest";
         [jumpaudio playEffect:@"jump.wav"];
         _jumped = TRUE;
         [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.9f];
+//        NSLog(@"%d", nextIndx);
     }
 }
 
@@ -426,12 +542,13 @@ static NSString *const highscore = @"highest";
     if (!_stop) {
         self.paused = YES;
         self.userInteractionEnabled = FALSE;
-//        [[OALSimpleAudio sharedInstance] stopBg];
+        [[OALSimpleAudio sharedInstance] stopBg];
         _stop = YES;
     }else{
         self.paused = NO;
         self.userInteractionEnabled = TRUE;
         _stop = NO;
+        [[OALSimpleAudio sharedInstance] playBg];
     }
 }
 
@@ -443,18 +560,22 @@ static NSString *const highscore = @"highest";
     self.paused = YES;
     self.userInteractionEnabled = FALSE;
     pause.enabled = NO;
-    NSLog(@"word %@, solution %@", word, [solution lastObject]);
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:highscore]==nil){
+    [[OALSimpleAudio sharedInstance] stopBg];
+    OALSimpleAudio *fail = [OALSimpleAudio sharedInstance];
+    [fail playEffect:@"game-over.wav"];
+
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:highscore] == nil){
         [[NSUserDefaults standardUserDefaults] setInteger:score forKey:highscore];
         [[NSUserDefaults standardUserDefaults] synchronize];
+    }else{
+        int high = (int)[[NSUserDefaults standardUserDefaults] integerForKey:highscore];
+        if (high < score) {
+            [[NSUserDefaults standardUserDefaults] setInteger:score forKey:highscore];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     }
-//        level = 1;
-//    }else{
-//        [[NSUserDefaults standardUserDefaults] setInteger:5 forKey:highscore];
-//        int test = (int)[[NSUserDefaults standardUserDefaults] integerForKey:highscore];
-//        NSLog(@"%d", test);
-//    }
 }
 
 - (void)gameOver {

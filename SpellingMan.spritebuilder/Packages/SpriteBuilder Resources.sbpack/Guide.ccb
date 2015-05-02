@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>11</integer>
+	<integer>13</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -39,6 +39,105 @@
 		<string>CCNode</string>
 		<key>children</key>
 		<array>
+			<dict>
+				<key>UUID</key>
+				<integer>12</integer>
+				<key>baseClass</key>
+				<string>CCNodeColor</string>
+				<key>children</key>
+				<array/>
+				<key>customClass</key>
+				<string></string>
+				<key>displayName</key>
+				<string>CCNodeColor</string>
+				<key>memberVarAssignmentName</key>
+				<string></string>
+				<key>memberVarAssignmentType</key>
+				<integer>1</integer>
+				<key>properties</key>
+				<array>
+					<dict>
+						<key>name</key>
+						<string>name</string>
+						<key>type</key>
+						<string>StringSimple</string>
+						<key>value</key>
+						<string></string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>position</string>
+						<key>type</key>
+						<string>Position</string>
+						<key>value</key>
+						<array>
+							<real>165.38055419921875</real>
+							<real>156.5</real>
+							<integer>0</integer>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>contentSize</string>
+						<key>type</key>
+						<string>Size</string>
+						<key>value</key>
+						<array>
+							<real>100</real>
+							<real>100</real>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>anchorPoint</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.5</real>
+							<real>0.5</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>scale</string>
+						<key>type</key>
+						<string>ScaleLock</string>
+						<key>value</key>
+						<array>
+							<real>6.4396085739135742</real>
+							<real>4.2858967781066895</real>
+							<false/>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>color</string>
+						<key>type</key>
+						<string>Color3</string>
+						<key>value</key>
+						<array>
+							<real>0.99008923768997192</real>
+							<real>1</real>
+							<real>0.97255045175552368</real>
+							<real>0.40000000596046448</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>opacity</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.40000000596046448</real>
+					</dict>
+				</array>
+			</dict>
 			<dict>
 				<key>UUID</key>
 				<integer>1</integer>
@@ -72,7 +171,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.30000001192092896</real>
+							<real>0.33125001192092896</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -128,7 +227,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>25</real>
+							<real>34</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -292,7 +391,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.18000000715255737</real>
+							<real>0.15000000596046448</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -316,9 +415,9 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
-							<false/>
+							<real>1.810448169708252</real>
+							<real>1.810448169708252</real>
+							<true/>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -618,7 +717,7 @@
 						<key>value</key>
 						<array>
 							<real>21.368438720703125</real>
-							<real>237.83241271972656</real>
+							<real>244.37977600097656</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -642,8 +741,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.87402993440628052</real>
-							<real>0.87402993440628052</real>
+							<real>0.5835798978805542</real>
+							<real>0.5835798978805542</real>
 							<true/>
 							<integer>0</integer>
 						</array>
@@ -758,8 +857,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.56465119123458862</real>
-							<real>0.56465119123458862</real>
+							<real>0.46913653612136841</real>
+							<real>0.46913653612136841</real>
 							<true/>
 							<integer>0</integer>
 						</array>
@@ -849,8 +948,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>369.24658203125</real>
-							<real>237.83241271972656</real>
+							<real>372.24658203125</real>
+							<real>245.83248901367188</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -874,8 +973,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.69224059581756592</real>
-							<real>0.69224059581756592</real>
+							<real>0.4862968921661377</real>
+							<real>0.4862968921661377</real>
 							<true/>
 							<integer>0</integer>
 						</array>
@@ -966,7 +1065,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>179.51028442382812</real>
+							<real>199.32267761230469</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1004,7 +1103,7 @@
 						<key>value</key>
 						<array>
 							<string>The Word 
-Need To Spell</string>
+</string>
 							<false/>
 						</array>
 					</dict>
@@ -1014,7 +1113,7 @@ Need To Spell</string>
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Optima-Bold</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1153,6 +1252,8 @@ Need To Spell</string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1186,8 +1287,8 @@ Need To Spell</string>
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>338.24658203125</real>
-							<real>178.80772399902344</real>
+							<real>354.24658203125</real>
+							<real>198.83073425292969</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1235,7 +1336,7 @@ Completed Word</string>
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Optima-Bold</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1407,8 +1508,8 @@ Completed Word</string>
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>172.00001525878906</real>
-							<real>199.32267761230469</real>
+							<real>174.00001525878906</real>
+							<real>210.83073425292969</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1455,7 +1556,7 @@ Completed Word</string>
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Optima-Bold</string>
 					</dict>
 					<dict>
 						<key>name</key>

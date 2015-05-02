@@ -1,5 +1,4 @@
 #import "MainScene.h"
-//#import <FacebookSDK/FacebookSDK.h>
 #import "CCTextureCache.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
@@ -11,7 +10,7 @@
 }
 
 -(void) Start{
-//    NSLog(@"Start Button OK");
+    NSLog(@"Start Button OK");
     CCScene *gameplayScene = [CCBReader loadAsScene:@"GamePlay"];
     [[CCDirector sharedDirector] replaceScene:gameplayScene];
     [loginButton removeFromSuperview];
@@ -30,6 +29,9 @@
   view = [CCDirector sharedDirector].view;
   loginButton.center = ccpAdd(view.center, CGPointMake(0, 120));
   [view addSubview:loginButton];
+
+  OALSimpleAudio *welcome = [OALSimpleAudio sharedInstance];
+  [welcome playEffect:@"welcome.wav"];
 }
 
 @end
