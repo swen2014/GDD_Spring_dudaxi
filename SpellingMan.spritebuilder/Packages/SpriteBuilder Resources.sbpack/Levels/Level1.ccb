@@ -175,7 +175,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -348,7 +348,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -521,7 +521,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -694,7 +694,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -730,6 +730,8 @@
 						<array/>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -867,7 +869,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1121,8 +1123,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1260,7 +1260,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>

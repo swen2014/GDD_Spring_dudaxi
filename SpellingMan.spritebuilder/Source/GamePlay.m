@@ -12,6 +12,7 @@
 #import "test.h"
 #import "Letter.h"
 #import "Lose.h"
+#import "Pause.h"
 #import "Instruction.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -67,6 +68,7 @@ static NSString *const highscore = @"highest";
     CCButton *ok;
     
     Instruction *guide;
+    Pause *pauseText;
     
     UIView *view;
     UIImage *shareImg;
@@ -101,6 +103,8 @@ static NSString *const highscore = @"highest";
 - (void)initilization{
     word = [[NSMutableString alloc] initWithCapacity:10];
     lastgoal = @"";
+    pauseText = (Pause *)[CCBReader load:@"pause" owner:self];
+
     // source
     data = [[NSArray alloc] initWithObjects:@"cmu", @"dudaxi",@"wendy", @"jeremy", @"curry",
             @"dion", @"larson",@"tony",@"jordan",@"thor",@"ultron", @"captain",nil];
@@ -153,6 +157,7 @@ static NSString *const highscore = @"highest";
         int num = (arc4random() % resource.count);
         goal = [resource objectAtIndex:num];
     }
+    lastgoal = [NSString stringWithFormat:@"%@", goal];
     NSString *cap = [goal uppercaseString];
     for (int i=0; i < cap.length; i++) {
         char c = [cap characterAtIndex:i];
@@ -190,13 +195,13 @@ static NSString *const highscore = @"highest";
         if (_gameWin) {
             score++;
             OALSimpleAudio *win = [OALSimpleAudio sharedInstance];
-            [win playEffect:@"win.wav"];
+            [win playEffect:@"win.wav" volume:0.8f pitch:1 pan:1 loop:NO];
             _countLabel.string = [NSString stringWithFormat:@"%d", score];
             [word setString:@""];
             _scoreLabel.string = [NSString stringWithFormat:@"%@", word];
             [solution removeAllObjects];
             [self generateWord:data];
-            scrollSpeed = scrollSpeed + (CGFloat) score * 10;
+            scrollSpeed = scrollSpeed + 15;
         }else{
         _gameOver = YES;
         }
@@ -283,36 +288,68 @@ static NSString *const highscore = @"highest";
         }
     }else{
 //        _gameOver = NO;
-        self.paused = YES;
-        
         CCScene *scene = [[CCDirector sharedDirector] runningScene];
         CCNode *node = [scene.children objectAtIndex:0];
-        shareImg = [self screenShot:node];
+//        shareImg = [self screenshotWithStartNode:node];
         view = [CCDirector sharedDirector].view;
-        
+        self.paused = YES;
         [self LosePopup];
     }
 }
 
--(void)Share{
-    [self facebookShare];
-}
-
--(void)facebookShare{
-    FBSDKSharePhoto *screen = [[FBSDKSharePhoto alloc] init];
-    screen.image = shareImg;
-    screen.userGenerated = YES;
-    //    [screen setImageURL:[NSURL URLWithString:@"http://spellingman.dudaxih.com"]];
-    
-    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-    content.photos = @[screen];
-    
-    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-    photo.image = shareImg;
-    photo.userGenerated = YES;
+//-(void)Share{
+//    [self facebookShare];
+////    [self shareToFacebook];
+//}
+//
+//-(void)facebookShare{
+//    FBSDKSharePhoto *screen = [[FBSDKSharePhoto alloc] init];
+//    UIImage *img = [UIImage imageNamed:@"spiral-ip5.png"];
+//    screen.image = img;
+//    screen.userGenerated = YES;
+//    [screen setImageURL:[NSURL URLWithString:@"http://spellingman.dudaxih.com"]];
+//    
 //    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-//    content.photos = @[photo];
+//    content.photos = @[screen];
+//    
+//    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+//    photo.image = shareImg;
+//    photo.userGenerated = YES;
+////    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+////    content.photos = @[photo];
+//    
+//    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+//    dialog.fromViewController = [CCDirector sharedDirector];
+//    [dialog setShareContent:content];
+//    dialog.mode = FBSDKShareDialogModeShareSheet;
+//    [dialog show];
+//}
+//
+//-(UIImage*) screenshotWithStartNode:(CCNode*)startNode
+//{
+//    [CCDirector sharedDirector].nextDeltaTimeZero = YES;
+//    
+//    CGSize winSize = [[CCDirector sharedDirector]viewSize];
+//    CCRenderTexture* rtx = [CCRenderTexture renderTextureWithWidth:winSize.width
+//                                     height:winSize.height];
+//    [rtx begin];
+//    [startNode visit];
+//    [rtx end];
+//    
+//    return [rtx getUIImage];
+//}
+
+-(void)Share{
+    CCScene *scene = [[CCDirector sharedDirector] runningScene];
+    CCNode *node = [scene.children objectAtIndex:0];
     
+    UIImage *image = [self screenshotImage:node];
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = image;
+    photo.userGenerated = YES;
+    [photo setImageURL:[NSURL URLWithString:@"http://www.itemsprisonbreak.com"]];
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
     FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
     dialog.fromViewController = [CCDirector sharedDirector];
     [dialog setShareContent:content];
@@ -320,18 +357,19 @@ static NSString *const highscore = @"highest";
     [dialog show];
 }
 
--(UIImage*) screenShot:(CCNode*)startNode
+-(UIImage*) screenshotImage:(CCNode*)startNode
 {
     [CCDirector sharedDirector].nextDeltaTimeZero = YES;
     
-    CGSize winSize = [[CCDirector sharedDirector]viewSize];
-    CCRenderTexture* rtx = [CCRenderTexture renderTextureWithWidth:winSize.width
-                                     height:winSize.height];
-    [rtx begin];
+    CGSize windowSize = [[CCDirector sharedDirector]viewSize];
+    CCRenderTexture* crt =
+    [CCRenderTexture renderTextureWithWidth:windowSize.width
+                                     height:windowSize.height];
+    [crt begin];
     [startNode visit];
-    [rtx end];
+    [crt end];
     
-    return [rtx getUIImage];
+    return [crt getUIImage];
 }
 
 #pragma mark - Level Layout Loop
@@ -352,10 +390,10 @@ static NSString *const highscore = @"highest";
         int pattern = arc4random()%3;
         if (pattern == 0) {
             [self addLetter1:400.0f position_y:257.0f];
-            [self addLetter4:406.0f position_y:115.0f];
+            [self addLetter4:406.0f position_y:118.0f];
         }else {
-            [self addLetter1:170.0f position_y:225.0f];
-            [self addLetter4:406.0f position_y:115.0f];
+            [self addLetter1:220.0f position_y:225.0f];
+            [self addLetter4:406.0f position_y:118.0f];
         }
     }
 }
@@ -518,10 +556,9 @@ static NSString *const highscore = @"highest";
     if (!_jumped) {
         _man.physicsBody.velocity = ccp(0,2200);
         OALSimpleAudio *jumpaudio = [OALSimpleAudio sharedInstance];
-        [jumpaudio playEffect:@"jump.wav"];
+        [jumpaudio playEffect:@"jump.wav" volume:0.3f pitch:1 pan:1 loop:NO ];
         _jumped = TRUE;
         [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.7f];
-//        NSLog(@"%d", nextIndx);
     }
 }
 
@@ -541,12 +578,17 @@ static NSString *const highscore = @"highest";
         self.userInteractionEnabled = FALSE;
         [[OALSimpleAudio sharedInstance] stopBg];
         _stop = YES;
+        [self addChild:pauseText];
+        
     }else{
         self.paused = NO;
         self.userInteractionEnabled = TRUE;
         _stop = NO;
         [[OALSimpleAudio sharedInstance] playBg];
+        [pauseText removeFromParent];
+        [pauseText removeFromParentAndCleanup:YES];
     }
+    
 }
 
 #pragma mark - Game Over
@@ -1044,8 +1086,8 @@ if (!_donotcalltwice) {
     // URL of image to be displayed alongside post
     content.imageURL = [NSURL URLWithString:@"https://git.makeschool.com/MakeSchool-Tutorials/News/f744d331484d043a373ee2a33d63626c352255d4//663032db-cf16-441b-9103-c518947c70e1/cover_photo.jpeg"];
     // title of post
-    content.contentTitle = [NSString stringWithFormat:@"My Test!"];
+    content.contentTitle = [NSString stringWithFormat:@"Spelling MAn Great!"];
     // description/body of post
-    content.contentDescription = @"Test ";
+    content.contentDescription = @"Fun Game To Share";
 }
 @end

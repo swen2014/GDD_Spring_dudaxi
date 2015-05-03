@@ -80,17 +80,26 @@
 		</dict>
 		<key>Asset</key>
 		<dict/>
-		<key>Asset/Item</key>
-		<dict>
-			<key>isSmartSpriteSheet</key>
-			<true/>
-		</dict>
 		<key>Asset/Letter</key>
 		<dict>
 			<key>isSmartSpriteSheet</key>
 			<true/>
 		</dict>
 		<key>Asset/Man</key>
+		<dict>
+			<key>isSmartSpriteSheet</key>
+			<true/>
+		</dict>
+		<key>Asset/Untitled Folder</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+			<key>isSmartSpriteSheet</key>
+			<true/>
+		</dict>
+		<key>Asset/item</key>
+		<dict/>
+		<key>Asset/items</key>
 		<dict>
 			<key>isSmartSpriteSheet</key>
 			<true/>
@@ -104,8 +113,6 @@
 		<dict/>
 		<key>ccbResources</key>
 		<dict>
-			<key>isDirty</key>
-			<true/>
 			<key>isSmartSpriteSheet</key>
 			<true/>
 			<key>previewFolderHidden</key>

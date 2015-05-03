@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>32</integer>
+	<integer>33</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -41,7 +41,7 @@
 		<array>
 			<dict>
 				<key>UUID</key>
-				<integer>7</integer>
+				<integer>32</integer>
 				<key>baseClass</key>
 				<string>CCSprite</string>
 				<key>children</key>
@@ -71,11 +71,11 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>320</real>
+							<real>0.49471831321716309</real>
+							<real>0.49041295051574707</real>
 							<integer>0</integer>
-							<integer>0</integer>
-							<integer>0</integer>
+							<integer>2</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -85,8 +85,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>1</real>
+							<real>0.5</real>
+							<real>0.5</real>
 						</array>
 					</dict>
 					<dict>
@@ -96,8 +96,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>4.8177080154418945</real>
-							<real>2.493018627166748</real>
+							<real>5.5038356781005859</real>
+							<real>3.0152089595794678</real>
 							<false/>
 							<integer>0</integer>
 						</array>
@@ -110,7 +110,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/bg.png</string>
+							<string>Asset/Untitled Folder/bg.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -218,7 +218,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/Mountains.png</string>
+							<string>Asset/Untitled Folder/Mountains.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -254,6 +254,8 @@
 						<array/>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -405,7 +407,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Asset/Item/groundnew.png</string>
+											<string>Asset/items/groundnew.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -578,7 +580,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Asset/Item/groundnew.png</string>
+											<string>Asset/items/groundnew.png</string>
 										</array>
 									</dict>
 									<dict>

@@ -67,6 +67,8 @@
 		B008A6461AF55A8500F63D5D /* game-over.wav in Resources */ = {isa = PBXBuildFile; fileRef = B008A6451AF55A8500F63D5D /* game-over.wav */; };
 		B008A64A1AF55D3700F63D5D /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = B008A6491AF55D3700F63D5D /* win.wav */; };
 		B008A64D1AF55FAB00F63D5D /* welcome.wav in Resources */ = {isa = PBXBuildFile; fileRef = B008A64C1AF55FAB00F63D5D /* welcome.wav */; };
+		B008A65C1AF5B58E00F63D5D /* Pause.m in Sources */ = {isa = PBXBuildFile; fileRef = B008A65B1AF5B58E00F63D5D /* Pause.m */; };
+		B008A65F1AF5BCCF00F63D5D /* spiral-ip5.png in Resources */ = {isa = PBXBuildFile; fileRef = B008A65E1AF5BCCF00F63D5D /* spiral-ip5.png */; };
 		B0233C691ADD9F9F00DDD30E /* Lose.m in Sources */ = {isa = PBXBuildFile; fileRef = B0233C681ADD9F9F00DDD30E /* Lose.m */; };
 		B042E9761AE9A59000F0E551 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B042E9751AE9A59000F0E551 /* Bolts.framework */; };
 		B042E97B1AE9A59E00F0E551 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B042E9771AE9A59E00F0E551 /* FBSDKCoreKit.framework */; };
@@ -187,6 +189,9 @@
 		B008A6451AF55A8500F63D5D /* game-over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "game-over.wav"; sourceTree = "<group>"; };
 		B008A6491AF55D3700F63D5D /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
 		B008A64C1AF55FAB00F63D5D /* welcome.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = welcome.wav; sourceTree = "<group>"; };
+		B008A65A1AF5B58E00F63D5D /* Pause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pause.h; path = Source/Pause.h; sourceTree = "<group>"; };
+		B008A65B1AF5B58E00F63D5D /* Pause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pause.m; path = Source/Pause.m; sourceTree = "<group>"; };
+		B008A65E1AF5BCCF00F63D5D /* spiral-ip5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "spiral-ip5.png"; path = "../../../Downloads/spiral-ip5.png"; sourceTree = "<group>"; };
 		B0233C671ADD9F9F00DDD30E /* Lose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lose.h; path = Source/Lose.h; sourceTree = "<group>"; };
 		B0233C681ADD9F9F00DDD30E /* Lose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lose.m; path = Source/Lose.m; sourceTree = "<group>"; };
 		B042E9751AE9A59000F0E551 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
@@ -486,10 +491,13 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B008A65E1AF5BCCF00F63D5D /* spiral-ip5.png */,
 				D352B48019EC608A00829775 /* MetalShaders */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
+				B008A65A1AF5B58E00F63D5D /* Pause.h */,
+				B008A65B1AF5B58E00F63D5D /* Pause.m */,
 				B0CD2F9B1AE8308B00E3CF4E /* GamePlayScene.h */,
 				B0CD2F9C1AE8308B00E3CF4E /* GamePlayScene.m */,
 				B0CD2F971AE820E300E3CF4E /* Instruction.h */,
@@ -806,6 +814,7 @@
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B008A6431AF53F1A00F63D5D /* background.mp3 in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
+				B008A65F1AF5BCCF00F63D5D /* spiral-ip5.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
@@ -893,6 +902,7 @@
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
 				B086760F1AD8BF0400EBB06D /* Level.m in Sources */,
 				B0F8EE2F1ADB1BD300185BA8 /* Letter.m in Sources */,
+				B008A65C1AF5B58E00F63D5D /* Pause.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

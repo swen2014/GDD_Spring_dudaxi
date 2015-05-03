@@ -211,7 +211,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/angrypoo.png</string>
+							<string>Asset/items/angrypoo.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -247,6 +247,8 @@
 						<array/>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -319,8 +321,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

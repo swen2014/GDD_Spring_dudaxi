@@ -169,13 +169,21 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>rotation</string>
+						<key>type</key>
+						<string>Degrees</string>
+						<key>value</key>
+						<real>0.64436686038970947</real>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>spriteFrame</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -348,7 +356,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -521,7 +529,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -694,7 +702,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -730,6 +738,8 @@
 						<array/>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -867,7 +877,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1040,7 +1050,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Asset/Item/grass.png</string>
+							<string>Asset/items/grass.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1154,8 +1164,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
