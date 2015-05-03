@@ -352,13 +352,10 @@ static NSString *const highscore = @"highest";
         int pattern = arc4random()%3;
         if (pattern == 0) {
             [self addLetter1:400.0f position_y:257.0f];
-            [self addLetter4:382.0f position_y:124.0f];
-        }else if (pattern ==1){
-            [self addLetter1:400.0f position_y:257.0f];
-            [self addLetter4:170.0f position_y:225.0f];
-        }else{
+            [self addLetter4:406.0f position_y:115.0f];
+        }else {
             [self addLetter1:170.0f position_y:225.0f];
-            [self addLetter4:382.0f position_y:124.0f];
+            [self addLetter4:406.0f position_y:115.0f];
         }
     }
 }
@@ -384,7 +381,7 @@ static NSString *const highscore = @"highest";
         }else if (pattern ==1){
             [self addLetter3:382.0f position_y:251.0f];
             [self addLetter3:110.0f position_y:270.0f];
-            [self addLetter2:101.0f position_y:55.0f];
+            [self addLetter2:101.0f position_y:60.0f];
         }else{
             [self addLetter2:415.0f position_y:163.0f];
             [self addLetter3:110.0f position_y:270.0f];
@@ -436,11 +433,11 @@ static NSString *const highscore = @"highest";
 -(void)addLetter4:(CGFloat)x position_y:(CGFloat)y{
     int length = (int)solution.count;
     int k = arc4random()% length;
-    int randomLetter = arc4random() % 10;
+//    int randomLetter = arc4random() % 10;
     NSString *random_result = [solution objectAtIndex:k];
     NSString *letterName = [NSString stringWithFormat:@"Letter/Letter%@", random_result];
     Letter *letter = (Letter *)[CCBReader load:letterName];
-    CGPoint screenPosition = [self convertToNodeSpace:ccp(randomLetter + x, y)];
+    CGPoint screenPosition = [self convertToNodeSpace:ccp(x, y)];
     letter.position = screenPosition;
     
     [_level1Node addChild:letter];
@@ -523,7 +520,7 @@ static NSString *const highscore = @"highest";
         OALSimpleAudio *jumpaudio = [OALSimpleAudio sharedInstance];
         [jumpaudio playEffect:@"jump.wav"];
         _jumped = TRUE;
-        [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.9f];
+        [self performSelector:@selector(resetJump) withObject:nil afterDelay:0.7f];
 //        NSLog(@"%d", nextIndx);
     }
 }

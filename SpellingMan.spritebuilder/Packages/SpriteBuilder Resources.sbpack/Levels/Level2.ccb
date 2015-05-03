@@ -136,7 +136,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>184</real>
+							<real>242</real>
 							<real>78</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1017,7 +1017,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>148</real>
+							<real>206</real>
 							<real>96</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1125,7 +1125,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>115</real>
+							<real>160</real>
 							<real>50.400001525878906</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1154,6 +1154,8 @@
 						<string>poo.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1232,8 +1234,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
