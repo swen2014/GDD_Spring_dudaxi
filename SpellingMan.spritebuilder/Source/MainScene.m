@@ -31,7 +31,7 @@
   [view addSubview:loginButton];
 
   OALSimpleAudio *welcome = [OALSimpleAudio sharedInstance];
-  [welcome playEffect:@"welcome.wav" volume:1.4 pitch:1 pan:1 loop:NO];
+  [welcome playEffect:@"welcome.wav" volume:2.5 pitch:1 pan:1 loop:NO];
 }
 
 @end
